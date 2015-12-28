@@ -54,7 +54,7 @@ namespace SolutionCrawler
                                 Console.WriteLine($"Too long: {item}");
                             }
 
-                            var i3 = new Spm1_MagicNumbers();
+                            var i3 = new Sp3_TooComplex();
                             foreach (var item in i3.GetLinesWithMagicNumbers(sourceFileRootNode))
                             {
                                 Console.WriteLine($"{item}");
