@@ -6,8 +6,9 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using System;
 using System.IO;
 using System.Linq;
+using Inspector.Analyzers;
 
-namespace SolutionCrawler
+namespace Inspector
 {
     class Program
     {
@@ -44,21 +45,10 @@ namespace SolutionCrawler
                                 sourceFileRootNode = VisualBasicSyntaxTree.ParseText(source).GetRoot();
                             };
 
-                            var identifier = new Wip1_VagueToDoIdentifier();
-                            foreach (var comment in identifier.GetToDoComments(sourceFileRootNode))
+                            var identifier = new VagueToDoComment();
+                            foreach (var comment in identifier.GetComments(sourceFileRootNode))
                                 Console.WriteLine($"{comment.LineNumber}: {comment.Content}");
 
-                            var identifier2 = new Sp1_RoutineTooLong();
-                            foreach (var item in identifier2.GetMethodsTooLong(sourceFileRootNode))
-                            {
-                                Console.WriteLine($"Too long: {item}");
-                            }
-
-                            var i3 = new Sp3_TooComplex();
-                            foreach (var item in i3.GetLinesWithMagicNumbers(sourceFileRootNode))
-                            {
-                                Console.WriteLine($"{item}");
-                            }
                         });
             });
 

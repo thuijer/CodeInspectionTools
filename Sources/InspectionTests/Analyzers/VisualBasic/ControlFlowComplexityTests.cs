@@ -2,11 +2,12 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.CodeAnalysis.VisualBasic;
+using Inspector.Analyzers.VisualBasic;
 
-namespace RoslynTests
+namespace InspectionTests.Analyzers.VisualBasic
 {
     [TestClass]
-    public class VB_Roslyn_Tests
+    public class ControlFlowComplexityTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
@@ -26,7 +27,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -56,7 +57,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -91,7 +92,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -124,7 +125,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -152,7 +153,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -178,7 +179,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -209,7 +210,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -242,7 +243,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -278,7 +279,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -304,7 +305,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -330,7 +331,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -358,7 +359,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
@@ -388,7 +389,7 @@ namespace RoslynTests
                 End Public
                 ");
 
-            var sut = new SolutionCrawler.VB.Sp3_TooComplex();
+            var sut = new ControlFlowComplexity();
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());

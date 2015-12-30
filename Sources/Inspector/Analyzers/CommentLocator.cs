@@ -1,97 +1,68 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Inspector.Analyzers;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SolutionCrawler
+namespace Inspector.Analyzers
 {
-    class Wip2_DisabledCode
-    {       
-        private readonly Predicate<string> _toDoCommentMatcher;
-        public Wip2_DisabledCode(Predicate<string> toDoCommentMatcher)
-        {
-            if (toDoCommentMatcher == null)
-                throw new ArgumentNullException("toDoCommentMatcher");
+    public abstract class CommentLocator
+    {
+        private readonly SyntaxNode syntaxNode;
 
-            _toDoCommentMatcher = toDoCommentMatcher;
-        }
-        public Wip2_DisabledCode() : this(DefaultToDoCommentFilter) { }
-
-        public static Predicate<string> DefaultToDoCommentFilter
-        {
-            get
-            {
-                // TODO: Tidy this up with a reg ex?
-                return commentContent =>
-                    commentContent.Contains("//TODO") ||
-                    commentContent.Contains("// TODO") ||
-                    commentContent.Contains("TODO:") ||
-                    commentContent.Contains("TODO[") ||
-                    commentContent.Contains("TODO [") ||
-                    commentContent.Contains("TODO\r") ||
-                    commentContent.Contains("TODO\n") ||
-                    commentContent.EndsWith("TODO");
-            }
-        }
-
-        public IEnumerable<Comment> GetToDoComments(SyntaxNode syntaxNode)
+        public CommentLocator(SyntaxNode syntaxNode)
         {
             if (syntaxNode == null)
                 throw new ArgumentException("syntaxNode");
 
-            var todoComments = new List<Comment>();
-            var commentLocatingVisitor = new CommentLocatingVisitor(
-                comment =>
-                {
-                    if (_toDoCommentMatcher(comment.Content))
-                        todoComments.Add(comment);
-                }
-            );
+            this.syntaxNode = syntaxNode;
+        }
+        protected abstract bool IsComment(SyntaxTrivia trivia);
+
+        public IEnumerable<Comment> GetComments(Predicate<string> filter=null)
+        {
+            if (filter == null)
+                filter = s => true; // retrieve all comments when no filter is given
+
+            var comments = new List<Comment>();
+
+            var commentLocatingVisitor = new CommentLocatingVisitor(IsComment, comment =>
+            {
+                if (filter(comment.Content))
+                    comments.Add(comment);
+            });
+
             commentLocatingVisitor.Visit(
                 syntaxNode
             );
-            return todoComments;
+
+            return comments;
         }
 
         private class CommentLocatingVisitor : SyntaxWalker
         {
             private readonly Action<Comment> _commentLocated;
-            public CommentLocatingVisitor(Action<Comment> commentLocated) : base(SyntaxWalkerDepth.StructuredTrivia)
+            private readonly Func<SyntaxTrivia, bool> _commentRecognizer;
+
+            public CommentLocatingVisitor(Func<SyntaxTrivia, bool> commentRecognizer, Action<Comment> commentLocated) : base(SyntaxWalkerDepth.StructuredTrivia)
             {
+                if (commentRecognizer == null)
+                    throw new ArgumentNullException("commentRecognizer");
+
+                _commentRecognizer = commentRecognizer;
+
                 if (commentLocated == null)
                     throw new ArgumentNullException("commentLocated");
 
                 _commentLocated = commentLocated;
             }
 
-            private static HashSet<SyntaxKind> _commentTypes = new HashSet<SyntaxKind>(new[] {
-                SyntaxKind.SingleLineCommentTrivia,
-                SyntaxKind.MultiLineCommentTrivia,
-                SyntaxKind.DocumentationCommentExteriorTrivia,
-                SyntaxKind.SingleLineDocumentationCommentTrivia,
-                SyntaxKind.MultiLineDocumentationCommentTrivia
-            });
-
-            public override void Visit(SyntaxNode node)
-            {
-                var nodeType = node.GetType();
-                base.Visit(node);
-            }
-
-            protected override void VisitToken(SyntaxToken token)
-            {
-                var tokenType = token.GetType();
-                base.VisitToken(token);
-            }
 
             protected override void VisitTrivia(SyntaxTrivia trivia)
             {
-                if (_commentTypes.Contains(trivia.Kind()))
+                if (_commentRecognizer(trivia))
                 {
                     string triviaContent;
                     using (var writer = new StringWriter())

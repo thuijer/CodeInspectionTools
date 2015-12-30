@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SolutionCrawler
+namespace Inspector.Analyzers
 {
     public class Comment
     {

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspector", "Inspector\Inspector.csproj", "{CFC4514F-9998-4B4A-A77D-AEBF58CAFBD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynTests", "InspectionTests\RoslynTests.csproj", "{A62F638B-F638-4DBE-A8B8-377140EFDEDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspectionTests", "InspectionTests\InspectionTests.csproj", "{A62F638B-F638-4DBE-A8B8-377140EFDEDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

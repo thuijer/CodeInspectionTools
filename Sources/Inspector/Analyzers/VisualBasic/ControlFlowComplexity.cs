@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.CodeAnalysis;
 
-namespace SolutionCrawler.VB
+namespace Inspector.Analyzers.VisualBasic
 {
-    public class Sp3_TooComplex
+    /// <summary>
+    /// Calculates the control-flow complexity for all methods in a given class.
+    /// Score can be used in the IfSQ Level 2 Sp-3 indicator (Count > 10)
+    /// </summary>
+    public class ControlFlowComplexity
     {
-        public IEnumerable<IfsqScore> GetMethodScores(SyntaxNode node)
+        public IEnumerable<MethodScore> GetMethodScores(SyntaxNode node)
         {
-            return GetMethods(node).Select(m => new IfsqScore
+            return GetMethods(node).Select(m => new MethodScore
             {
                 Method = GetMethodNameTemplate(m),
                 Score = GetScore(m)

@@ -7,8 +7,8 @@
     <ProjectGuid>{CFC4514F-9998-4B4A-A77D-AEBF58CAFBD5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolutionCrawler</RootNamespace>
-    <AssemblyName>SolutionCrawler</AssemblyName>
+    <RootNamespace>Inspector</RootNamespace>
+    <AssemblyName>Inspector</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -102,15 +102,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comment.cs" />
-    <Compile Include="IfsqScore.cs" />
+    <Compile Include="Analyzers\Comment.cs" />
+    <Compile Include="Analyzers\CSharp\CommentLocator.cs" />
+    <Compile Include="Analyzers\MethodScore.cs" />
+    <Compile Include="Analyzers\VagueToDoComment.cs" />
+    <Compile Include="Analyzers\VisualBasic\CommentLocator.cs" />
+    <Compile Include="Analyzers\VisualBasic\MethodLength.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sp3_TooComplex.cs" />
-    <Compile Include="Sp1_RoutineTooLong.cs" />
-    <Compile Include="VB\VB_Sp3_TooComplex.cs" />
-    <Compile Include="Wip1_VagueToDo.cs" />
-    <Compile Include="Wip2_DisabledCode.cs" />
+    <Compile Include="Analyzers\CSharp\MethodLength.cs" />
+    <Compile Include="Analyzers\VisualBasic\ControlFlowComplexity.cs" />
+    <Compile Include="Analyzers\CommentLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
