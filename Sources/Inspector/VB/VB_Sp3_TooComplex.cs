@@ -12,18 +12,11 @@ namespace SolutionCrawler.VB
     {
         public IEnumerable<IfsqScore> GetMethodScores(SyntaxNode node)
         {
-            var results = new List<IfsqScore>();
-            var methods = GetMethods(node);
-
-            foreach (var m in methods)
+            return GetMethods(node).Select(m => new IfsqScore
             {
-                results.Add(new IfsqScore
-                {
-                    Method = GetMethodNameTemplate(m),
-                    Score = GetScore(m)
-                });
-            }
-            return results;
+                Method = GetMethodNameTemplate(m),
+                Score = GetScore(m)
+            });
         }
 
         private string GetMethodNameTemplate(MethodBlockSyntax m)
@@ -33,11 +26,12 @@ namespace SolutionCrawler.VB
 
         private int GetScore(MethodBlockSyntax method)
         {
-            var ifs = method.DescendantNodes().OfType<BinaryExpressionSyntax>();
-            var cases = method.DescendantNodes().OfType<CaseClauseSyntax>();
-            var boolExpr = method.DescendantNodes().OfType<SingleLineIfStatementSyntax>().Where(c=>c.Condition is LiteralExpressionSyntax);
-            var boolExprMulti = method.DescendantNodes().OfType<IfStatementSyntax>().Where(c => c.Condition is LiteralExpressionSyntax);
-            var boolExprElse = method.DescendantNodes().OfType<ElseIfStatementSyntax>().Where(c => c.Condition is LiteralExpressionSyntax);
+            var nodes = method.DescendantNodes();
+            var ifs = nodes.OfType<BinaryExpressionSyntax>();
+            var cases = nodes.OfType<CaseClauseSyntax>();
+            var boolExpr = nodes.OfType<SingleLineIfStatementSyntax>().Where(c=>c.Condition is LiteralExpressionSyntax);
+            var boolExprMulti = nodes.OfType<IfStatementSyntax>().Where(c => c.Condition is LiteralExpressionSyntax);
+            var boolExprElse = nodes.OfType<ElseIfStatementSyntax>().Where(c => c.Condition is LiteralExpressionSyntax);
 
             return ifs.Count() + cases.Count() + boolExpr.Count() + boolExprMulti.Count() + boolExprElse.Count();
         }

@@ -109,9 +109,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SolutionCrawler\SolutionCrawler.csproj">
+    <ProjectReference Include="..\SolutionCrawler\Inspector.csproj">
       <Project>{cfc4514f-9998-4b4a-a77d-aebf58cafbd5}</Project>
-      <Name>SolutionCrawler</Name>
+      <Name>Inspector</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
