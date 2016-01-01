@@ -31,7 +31,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(0, results.First().Score);
         }
 
@@ -61,7 +61,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -96,7 +96,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(2, results.First().Score);
         }
 
@@ -129,7 +129,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(3, results.First().Score);
         }
 
@@ -157,7 +157,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(3, results.First().Score);
         }
 
@@ -183,7 +183,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -214,7 +214,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -247,7 +247,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(2, results.First().Score);
         }
 
@@ -283,7 +283,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(3, results.First().Score);
         }
 
@@ -309,7 +309,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -335,7 +335,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -363,7 +363,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(1, results.First().Score);
         }
 
@@ -393,7 +393,7 @@ namespace InspectionTests.Analyzers.VisualBasic
             var results = sut.GetMethodScores(parsedNode);
 
             Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("Function TestMe", results.First().Method);
+            Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
             Assert.AreEqual(2, results.First().Score);
         }
         private static Microsoft.CodeAnalysis.SyntaxNode GetSourceAsSyntaxTree(string vbCode)

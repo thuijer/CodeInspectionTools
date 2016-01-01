@@ -1,4 +1,5 @@
 ﻿
+using Inspector.Analyzers;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Linq;
@@ -20,16 +21,10 @@ namespace Inspector
 
             Console.WriteLine($"Solution based linecount: {sourceFiles.Sum(sf => sf.LinesOfCode)}");
 
-            //sourceFiles.Where(s => s.MethodScores.Any(ms => ms.Score > 150)).ToList().ForEach(f =>
-            //   {
-            //       Console.WriteLine($"{f.Project.Name} {f.FileName} {f.LinesOfCode}");
-            //       f.MethodScores.Where(ms => ms.Score > 150).ToList().ForEach(ms => Console.WriteLine(ms));
-            //   });
-
-            sourceFiles.Where(sf=>sf.Language == "C#").ToList().ForEach(f =>
+            sourceFiles.Where(sf=>sf.MethodScores.OfType<ControlFlowComplexityScore>().Any(s=>s.Score > 10)).ToList().ForEach(f =>
             {
                 Console.WriteLine($"{f.Project.Name} {f.FileName} {f.LinesOfCode}");
-                f.MethodScores.ToList().ForEach(ms => Console.WriteLine(ms));
+                f.MethodScores.OfType<ControlFlowComplexityScore>().Where(ms=>ms.Score > 10).ToList().ForEach(ms => Console.WriteLine(ms));
             });
 
             Console.WriteLine("--- Analyzing done ---");
