@@ -1,6 +1,4 @@
-﻿using Inspector.Analyzers;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,10 @@ using System.IO;
 
 namespace Inspector.Analyzers
 {
+    /// <summary>
+    /// Basic (abstract) behavior. Use Inspector.Analyzers.CSharp.CommentLocator or
+    /// Inspector.Analyzers.VisualBasic.CommentLocator instead.
+    /// </summary>
     public abstract class CommentLocator
     {
         private readonly SyntaxNode syntaxNode;

@@ -9,26 +9,22 @@ namespace Inspector.Analyzers.VisualBasic
     /// Calculates the method length for all methods in a given class.
     /// Method length includes all lines, including blanc and comment lines
     /// </summary>
-    public class MethodLength
+    public class MethodLength : VisualBasicAnalyzer
     {
-        public IEnumerable<MethodScore> GetMethodScores(SyntaxNode node)
+        public override IEnumerable<MethodScore> GetMethodScores(SyntaxNode node)
         {
-            var methods = node.DescendantNodes().OfType<MethodBlockSyntax>();
-            foreach (var item in methods)
+            return node.DescendantNodes().OfType<MethodBlockSyntax>().Select(item =>
             {
                 string fullMethod = string.Empty;
                 fullMethod = item.ToFullString();
 
                 var lines = fullMethod.Split('\n');
-
+                
                 var totalLength = lines.Length - 1;
-
-                yield return new MethodScore
-                {
-                    Method = $"{item.BlockStatement.DeclarationKeyword} {(item.BlockStatement as Microsoft.CodeAnalysis.VisualBasic.Syntax.MethodStatementSyntax).Identifier}",
-                    Score = totalLength
-                };
-            };
+                var emptyLines = lines.Where(l => string.IsNullOrWhiteSpace(l)).Count();
+                var linesStartingWithComment = lines.Where(l => l.Trim().StartsWith("'")).Count();
+                return CreateScore<MethodLengthScore>(item, totalLength-emptyLines-linesStartingWithComment);
+            });
         }
     }
 }
