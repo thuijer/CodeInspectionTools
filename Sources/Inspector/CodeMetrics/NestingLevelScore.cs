@@ -8,5 +8,6 @@ namespace Inspector.CodeMetrics
 {
     public class NestingLevelScore : MethodScore
     {
+        public Dictionary<int, int> LineCountPerLevel { get; internal set; }
     }
 }

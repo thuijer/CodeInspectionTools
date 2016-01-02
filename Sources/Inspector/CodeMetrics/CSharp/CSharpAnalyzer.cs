@@ -9,25 +9,16 @@ namespace Inspector.CodeMetrics.CSharp
     {
         public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
 
-        protected MethodScore CreateScore<T>(MethodDeclarationSyntax m, int score) where T : MethodScore, new()
+        protected T CreateScore<T>(MethodDeclarationSyntax m, int score) where T : MethodScore, new()
         {
-            MethodScore result = new T();
+            T result = new T();
             result.ClassName = GetClassName(m);
             result.Method = GetMethodName(m);
             result.Score = score;
 
             return result;
         }
-
-        //protected MethodScore CreateScore(MethodDeclarationSyntax m, int score)
-        //{
-        //    return new MethodScore
-        //    {
-        //        ClassName = GetClassName(m),
-        //        Method = GetMethodName(m),
-        //        Score = score
-        //    };
-        //}
+                
         private string GetClassName(MethodDeclarationSyntax m)
         {
             var classBlock = m.Parent as Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax;

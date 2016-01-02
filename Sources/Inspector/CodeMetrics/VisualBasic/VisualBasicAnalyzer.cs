@@ -12,7 +12,7 @@ namespace Inspector.CodeMetrics.VisualBasic
     {
         public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
 
-        protected MethodScore CreateScore<T>(MethodBlockSyntax m, int score) where T: MethodScore, new()
+        protected T CreateScore<T>(MethodBlockSyntax m, int score) where T: MethodScore, new()
         {
             return new T()
             {

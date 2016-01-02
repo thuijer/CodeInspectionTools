@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Inspector.CodeMetrics.CSharp
 {
@@ -15,19 +16,28 @@ namespace Inspector.CodeMetrics.CSharp
                 var visitor = new Walker();
                 visitor.Visit(m);
 
-                int score = visitor.MaxLevel;
-                return CreateScore<NestingLevelScore>(m, score);
+                int maxLevel = visitor.MaxLevel;
+                var score= CreateScore<NestingLevelScore>(m, maxLevel);
+                score.LineCountPerLevel = new Dictionary<int, int>(visitor.LineCountPerLevel);
+                return score;
             }
             );
 
         }
         private class Walker : CSharpSyntaxWalker
         {
+            private readonly Dictionary<int, int> lineCountPerLevel = new Dictionary<int, int>();
 
+            public Dictionary<int,int> LineCountPerLevel
+            {
+                get
+                {
+                    return lineCountPerLevel;
+                }
+            }
             public override void VisitIfStatement(IfStatementSyntax node)
             {
-                IncreaseLevel();
-
+                IncreaseLevel(node.Statement.ToString());
                 base.VisitIfStatement(node);
 
                 DecreaseLevel();
@@ -38,38 +48,51 @@ namespace Inspector.CodeMetrics.CSharp
                 currentLevel--;
             }
 
-            private void IncreaseLevel()
+            private void IncreaseLevel(string code)
             {
                 currentLevel++;
 
                 if (currentLevel > MaxLevel)
+                {
                     MaxLevel = currentLevel;
+                    StoreLineCountForThisLevel(code);
+                }
+            }
+
+            private void StoreLineCountForThisLevel(string code)
+            {
+                int lineCount = code.Split('\n').Count();
+
+                if (lineCountPerLevel.ContainsKey(currentLevel))
+                    lineCountPerLevel[currentLevel] += lineCount;
+                else
+                    lineCountPerLevel.Add(currentLevel, lineCount);
             }
 
             public override void VisitSwitchStatement(SwitchStatementSyntax node)
             {
-                IncreaseLevel();
+                IncreaseLevel(node.ToString());
                 base.VisitSwitchStatement(node);
                 DecreaseLevel();
             }
 
             public override void VisitWhileStatement(WhileStatementSyntax node)
             {
-                IncreaseLevel();
+                IncreaseLevel(node.ToString());
                 base.VisitWhileStatement(node);
                 DecreaseLevel();
             }
 
             public override void VisitDoStatement(DoStatementSyntax node)
             {
-                IncreaseLevel();
+                IncreaseLevel(node.ToString());
                 base.VisitDoStatement(node);
                 DecreaseLevel();
             }
 
             public override void VisitForStatement(ForStatementSyntax node)
             {
-                IncreaseLevel();
+                IncreaseLevel(node.Statement.ToString());
                 base.VisitForStatement(node);
                 DecreaseLevel();
             }
