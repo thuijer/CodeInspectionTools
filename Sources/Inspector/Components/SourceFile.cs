@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Inspector.CodeMetrics;
+﻿using Inspector.CodeMetrics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Inspector
 {

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.CodeAnalysis;
+﻿using FluentAssertions;
 using Inspector.CodeMetrics.CSharp;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace InspectionTests.Analyzers.CSharp
 {
-
     [TestClass]
     public class ControlFlowComplexityTests
     {
@@ -31,9 +30,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(0, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(0);
         }
 
         [TestMethod]
@@ -59,9 +58,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
 
@@ -92,9 +91,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(2, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
         }
 
 
@@ -123,9 +122,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(3, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(3);
         }
 
         [TestMethod]
@@ -150,9 +149,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(3, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(3);
         }
 
         [TestMethod]
@@ -175,9 +174,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
         [TestMethod]
@@ -205,9 +204,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
         [TestMethod]
@@ -239,9 +238,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(2, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
         }
 
         [TestMethod]
@@ -275,9 +274,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(3, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(3);
         }
 
         [TestMethod]
@@ -300,9 +299,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
         [TestMethod]
@@ -325,9 +324,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
         [TestMethod]
@@ -353,9 +352,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(1, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
         }
 
         [TestMethod]
@@ -381,9 +380,9 @@ namespace InspectionTests.Analyzers.CSharp
             var sut = new ControlFlowComplexity();
             var results = sut.GetMetrics(parsedNode);
 
-            Assert.AreEqual(1, results.Count());
-            Assert.AreEqual("bool TestMe (int i)", results.First().Method);
-            Assert.AreEqual(2, results.First().Score);
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
         }
         private static Microsoft.CodeAnalysis.SyntaxNode GetSourceAsSyntaxTree(string vbCode)
         {

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Inspector
 {
@@ -8,7 +8,7 @@ namespace Inspector
         private readonly string absolutePath;
         private readonly string projectGuid;
         private readonly string projectName;
-        private readonly ICollection<SourceFile> sources= new List<SourceFile>();
+        private readonly IList<SourceFile> sources= new List<SourceFile>();
 
         public Project(string projectGuid, string projectName, string absolutePath)
         {
@@ -27,7 +27,7 @@ namespace Inspector
             get { return projectGuid;  }
         }
 
-        public void AddSourceFile(SourceFile sourceFile)
+        internal void AddSourceFile(SourceFile sourceFile)
         {
             sources.Add(sourceFile);
         }
@@ -40,6 +40,14 @@ namespace Inspector
         public override string ToString()
         {
             return $"{Name} ({Path})";
+        }
+
+        public ICollection<SourceFile> SourceFiles
+        {
+            get
+            {
+                return new ReadOnlyCollection<SourceFile>(sources);
+            }
         }
     }
 }
