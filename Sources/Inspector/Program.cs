@@ -1,5 +1,5 @@
-﻿
-using Inspector.Analyzers;
+﻿using Inspector.CodeMetrics;
+using Inspector.Components;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Linq;
@@ -8,16 +8,16 @@ namespace Inspector
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            var info = new SolutionInfo();
-            info.AddCodeAnalyzer(new Analyzers.VisualBasic.ControlFlowComplexity());
-            info.AddCodeAnalyzer(new Analyzers.VisualBasic.MethodLength());
-            info.AddCodeAnalyzer(new Analyzers.CSharp.MethodLength());
-            info.AddCodeAnalyzer(new Analyzers.CSharp.ControlFlowComplexity());
+            var info = new Solution(args.First());
+            var analysis = new SourceFileAnalyzer();
+            analysis.AddCodeMetric(new CodeMetrics.VisualBasic.ControlFlowComplexity());
+            analysis.AddCodeMetric(new CodeMetrics.VisualBasic.MethodLength());
+            analysis.AddCodeMetric(new CodeMetrics.CSharp.MethodLength());
+            analysis.AddCodeMetric(new CodeMetrics.CSharp.ControlFlowComplexity());
 
-            var sourceFiles = info.GetSourceFiles(args.First());
+            var sourceFiles = analysis.Analyze(info);
 
             Console.WriteLine($"Solution based linecount: {sourceFiles.Sum(sf => sf.LinesOfCode)}");
 

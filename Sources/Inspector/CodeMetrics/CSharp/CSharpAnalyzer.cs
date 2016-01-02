@@ -3,11 +3,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Inspector.Analyzers.CSharp
+namespace Inspector.CodeMetrics.CSharp
 {
-    public abstract class CSharpAnalyzer : ICodeAnalyzer
+    public abstract class CSharpAnalyzer : ICodeMetricAnalyzer
     {
-        public abstract IEnumerable<MethodScore> GetMethodScores(SyntaxNode node);
+        public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
 
         protected MethodScore CreateScore<T>(MethodDeclarationSyntax m, int score) where T : MethodScore, new()
         {

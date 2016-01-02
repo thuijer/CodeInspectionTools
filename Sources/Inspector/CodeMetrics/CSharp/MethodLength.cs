@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System;
 
-namespace Inspector.Analyzers.CSharp
+namespace Inspector.CodeMetrics.CSharp
 {
     public class MethodLength : CSharpAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMethodScores(SyntaxNode node)
+        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node).Select(item =>
             {

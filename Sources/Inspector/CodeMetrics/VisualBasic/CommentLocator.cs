@@ -1,10 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 
-namespace Inspector.Analyzers.VisualBasic
+namespace Inspector.CodeMetrics.VisualBasic
 {
 
-    public class CommentLocator : Analyzers.CommentLocator
+    public class CommentLocator : CodeMetrics.CommentLocator
     {
         public CommentLocator(SyntaxNode node) : base(node)
         {

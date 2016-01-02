@@ -1,4 +1,4 @@
-﻿namespace Inspector.Analyzers
+﻿namespace Inspector.CodeMetrics
 {
     public class MethodScore
     {

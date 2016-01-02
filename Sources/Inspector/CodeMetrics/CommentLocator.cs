@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Inspector.Analyzers
+namespace Inspector.CodeMetrics
 {
     /// <summary>
     /// Basic (abstract) behavior. Use Inspector.Analyzers.CSharp.CommentLocator or

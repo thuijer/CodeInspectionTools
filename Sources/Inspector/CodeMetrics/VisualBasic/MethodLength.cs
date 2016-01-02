@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Inspector.Analyzers.VisualBasic
+namespace Inspector.CodeMetrics.VisualBasic
 {
     /// <summary>
     /// Calculates the method length for all methods in a given class.
@@ -11,7 +11,7 @@ namespace Inspector.Analyzers.VisualBasic
     /// </summary>
     public class MethodLength : VisualBasicAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMethodScores(SyntaxNode node)
+        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
         {
             return node.DescendantNodes().OfType<MethodBlockSyntax>().Select(item =>
             {
@@ -20,7 +20,7 @@ namespace Inspector.Analyzers.VisualBasic
 
                 var lines = fullMethod.Split('\n');
                 
-                var totalLength = lines.Length - 1;
+                var totalLength = lines.Length;
                 var emptyLines = lines.Where(l => string.IsNullOrWhiteSpace(l)).Count();
                 var linesStartingWithComment = lines.Where(l => l.Trim().StartsWith("'")).Count();
                 return CreateScore<MethodLengthScore>(item, totalLength-emptyLines-linesStartingWithComment);

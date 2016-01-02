@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Inspector.Analyzers
+namespace Inspector.CodeMetrics
 {
     public class VagueToDoComment
     {
@@ -37,11 +37,11 @@ namespace Inspector.Analyzers
 
         public IEnumerable<Comment> GetComments (SyntaxNode node)
         {
-            Analyzers.CommentLocator cl;
+            CodeMetrics.CommentLocator cl;
             if (node.Language == csharp)
-                cl = new Analyzers.CSharp.CommentLocator(node);
+                cl = new CodeMetrics.CSharp.CommentLocator(node);
             else
-                cl = new Analyzers.VisualBasic.CommentLocator(node);
+                cl = new CodeMetrics.VisualBasic.CommentLocator(node);
 
             return cl.GetComments(_toDoCommentMatcher);
         }

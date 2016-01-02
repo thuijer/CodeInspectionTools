@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.CodeAnalysis.VisualBasic;
-using Inspector.Analyzers.VisualBasic;
+using Inspector.CodeMetrics.VisualBasic;
 
 namespace InspectionTests.Analyzers.VisualBasic
 {
@@ -28,7 +28,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -58,7 +58,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -93,7 +93,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -126,7 +126,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -154,7 +154,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -180,7 +180,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -211,7 +211,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -244,7 +244,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -280,7 +280,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -306,7 +306,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -332,7 +332,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -360,7 +360,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);
@@ -390,7 +390,7 @@ namespace InspectionTests.Analyzers.VisualBasic
                 ");
 
             var sut = new ControlFlowComplexity();
-            var results = sut.GetMethodScores(parsedNode);
+            var results = sut.GetMetrics(parsedNode);
 
             Assert.AreEqual(1, results.Count());
             Assert.AreEqual("Function TestMe(i as Integer)", results.First().Method);

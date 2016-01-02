@@ -102,26 +102,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyzers\Comment.cs" />
-    <Compile Include="Analyzers\ControlFlowComplexityScore.cs" />
-    <Compile Include="Analyzers\CSharp\CommentLocator.cs" />
-    <Compile Include="Analyzers\CSharp\ControlFlowComplexity.cs" />
-    <Compile Include="Analyzers\CSharp\CSharpAnalyzer.cs" />
-    <Compile Include="Analyzers\MethodLengthScore.cs" />
-    <Compile Include="Analyzers\MethodScore.cs" />
-    <Compile Include="Analyzers\VagueToDoComment.cs" />
-    <Compile Include="Analyzers\VisualBasic\CommentLocator.cs" />
-    <Compile Include="Analyzers\ICodeAnalyzer.cs" />
-    <Compile Include="Analyzers\VisualBasic\MethodLength.cs" />
-    <Compile Include="Analyzers\VisualBasic\VisualBasicAnalyzer.cs" />
-    <Compile Include="Project.cs" />
-    <Compile Include="SourceFile.cs" />
+    <Compile Include="CodeMetrics\Comment.cs" />
+    <Compile Include="CodeMetrics\ControlFlowComplexityScore.cs" />
+    <Compile Include="CodeMetrics\CSharp\CommentLocator.cs" />
+    <Compile Include="CodeMetrics\CSharp\ControlFlowComplexity.cs" />
+    <Compile Include="CodeMetrics\CSharp\CSharpAnalyzer.cs" />
+    <Compile Include="CodeMetrics\MethodLengthScore.cs" />
+    <Compile Include="CodeMetrics\MethodScore.cs" />
+    <Compile Include="CodeMetrics\VagueToDoComment.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\CommentLocator.cs" />
+    <Compile Include="CodeMetrics\ICodeAnalyzer.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\MethodLength.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\VisualBasicAnalyzer.cs" />
+    <Compile Include="Components\Project.cs" />
+    <Compile Include="Components\SourceFileAnalyzer.cs" />
+    <Compile Include="Components\SourceFile.cs" />
+    <Compile Include="Infrastructure\IProjectParser.cs" />
+    <Compile Include="Infrastructure\ISolutionParser.cs" />
+    <Compile Include="Infrastructure\ProjectParser.cs" />
+    <Compile Include="Infrastructure\SolutionFileParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Analyzers\CSharp\MethodLength.cs" />
-    <Compile Include="Analyzers\VisualBasic\ControlFlowComplexity.cs" />
-    <Compile Include="Analyzers\CommentLocator.cs" />
-    <Compile Include="SolutionInfo.cs" />
+    <Compile Include="CodeMetrics\CSharp\MethodLength.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\ControlFlowComplexity.cs" />
+    <Compile Include="CodeMetrics\CommentLocator.cs" />
+    <Compile Include="Components\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

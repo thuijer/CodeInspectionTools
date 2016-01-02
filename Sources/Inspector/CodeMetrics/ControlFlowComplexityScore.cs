@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inspector.Analyzers
+namespace Inspector.CodeMetrics
 {
-    public class MethodLengthScore : MethodScore
+    public class ControlFlowComplexityScore : MethodScore
     {
     }
 }

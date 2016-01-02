@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inspector.Analyzers
+namespace Inspector.CodeMetrics
 {
     public class Comment
     {

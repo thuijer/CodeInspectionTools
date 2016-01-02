@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace Inspector.Analyzers.VisualBasic
+namespace Inspector.CodeMetrics.VisualBasic
 {
-    public abstract class VisualBasicAnalyzer : ICodeAnalyzer
+    public abstract class VisualBasicAnalyzer : ICodeMetricAnalyzer
     {
-        public abstract IEnumerable<MethodScore> GetMethodScores(SyntaxNode node);
+        public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
 
         protected MethodScore CreateScore<T>(MethodBlockSyntax m, int score) where T: MethodScore, new()
         {

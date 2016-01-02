@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
-namespace Inspector.Analyzers.CSharp
+namespace Inspector.CodeMetrics.CSharp
 {
-    public class CommentLocator : Analyzers.CommentLocator
+    public class CommentLocator : CodeMetrics.CommentLocator
     {
         public CommentLocator(SyntaxNode node) : base(node)
         {
