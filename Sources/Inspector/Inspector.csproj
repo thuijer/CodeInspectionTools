@@ -117,6 +117,8 @@
     <Compile Include="Components\Project.cs" />
     <Compile Include="Components\SourceFileAnalyzer.cs" />
     <Compile Include="Components\SourceFile.cs" />
+    <Compile Include="Infrastructure\FileSystemAdapter.cs" />
+    <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
     <Compile Include="Infrastructure\IProjectParser.cs" />
     <Compile Include="Infrastructure\ISolutionParser.cs" />
     <Compile Include="Infrastructure\ProjectParser.cs" />
