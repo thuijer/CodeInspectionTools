@@ -1,33 +1,32 @@
 ﻿using FluentAssertions;
 using Inspector.CodeMetrics.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class ControlFlowComplexityTests : VisualBasicMetricTest
+    public class NestingLevelTests : VisualBasicMetricTest
     {
         [TestMethod]
-        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
+        public void EmptyMethod_ShouldHave_NestingLevel0()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
-                <Serializable()> _
+                <Serializable>_
                 Public Class TestClass
                     Sub New()
                     End Sub
 
-                    Public Function TestMe(i as Integer) As Boolean                       
+                    Public Function TestMe(i as Integer) As Boolean
                         return false
                     End Function
                 End Class
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -36,360 +35,56 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         }
 
         [TestMethod]
-        public void SimpleIf_ShouldReturn_MethodWithScoreOf_1()
+        public void SingleIfStatement_ShouldHave_NestingLevel1()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
-                <Serializable()> _
+                <Serializable>_
                 Public Class TestClass
                     Sub New()
-                    End Sub
-
+                    
                     Public Function TestMe(i as Integer) As Boolean
-                        if (i = 10) then
-                            return true
-                        end if
-
-                        return false
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-
-        [TestMethod]
-        public void IfElseIf_ShouldReturn_MethodWithScoreOf_2()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        if (i = 10) then
-                            return true
-                        elseif i>10 then
-                            return true
-                        else
-                            return false
-                        end if
-
-                        return false
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(2);
-        }
-
-
-        [TestMethod]
-        public void IfElseIfAndReturnWithExpression_ShouldReturn_MethodWithScoreOf_3()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        if (i = 10) then
-                            return true
-                        elseif i>10 then
-                            return true
-                        end if
-
-                        return i=0
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(3);
-        }
-
-        [TestMethod]
-        public void IfWithAnd_ShouldReturn_MethodWithScoreOf_3()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        Dim check = False
-                        if i = 10 And check = True then
-                            return true
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(3);
-        }
-
-        [TestMethod]
-        public void SingleLineIf_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        if i = 10 then return true
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void SelectCaseWith1Option_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        Select Case i
-                            Case 0
-                                return true                            
-                        End Select
-
-                        return false
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void SelectCaseWith2Options_ShouldReturn_MethodWithScoreOf_2()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        Select Case i
-                            Case 0
-                                return true       
-                            Case 1
-                                return true                     
-                        End Select
-
-                        return false
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(2);
-        }
-
-        [TestMethod]
-        public void SelectCaseWith2OptionsAndEmbeddedIf_ShouldReturn_MethodWithScoreOf_3()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        Dim z = true
-                        Select Case i
-                            Case 0
-                                if z = True then 
-                                    return true       
-                                end if
-                            Case 1
-                                return true                     
-                        End Select
-
-                        return false
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(3);
-        }
-
-        [TestMethod]
-        public void ReturnWithExpression_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        return i > 0
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void IfWithBoolean_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        If True then return false else return true
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void IfWithBooleanMultiLine_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        If True then 
-                            return false 
-                        End If
-                    End Function
-                End Class
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void ElseIfWithBoolean_ShouldReturn_MethodWithScoreOf_2()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                Imports System
-                Imports System.Text
-
-                <Serializable()> _
-                Public Class TestClass
-                    Sub New()
-                    End Sub
-
-                    Public Function TestMe(i as Integer) As Boolean
-                        If True then 
-                            return false 
-                        ElseIf False then
+                        If i > 10 Then
                             return true
                         End If
+                        return false
                     End Function
                 End Class
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void NestedIfStatement_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        If i > 10 Then 
+                            If true Then 
+                                return true
+                            End if                            
+                        End If
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -397,5 +92,239 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             results.First().Score.Should().Be(2);
         }
 
+        [TestMethod]
+        public void TwoIfStatements_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        if (i > 10) then
+                            return true
+                        end if
+
+                        if (i < 0) then
+                            return true                            
+                        end if
+
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void NestedIfStatements_ShouldHave_NestingLevel3()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        If (i > 10) Then
+                            if (true) Then
+                                if (i==0) Then
+                                    return true
+                                End If
+                            End If 
+                        End If
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(3);
+        }
+
+        [TestMethod]
+        public void SimpleCase_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Select Case i
+                            case 10:
+                                return true
+                        End Select
+                        
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void CaseWithNestedIf_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Select Case i
+                            case 10:
+                                if (i>0) then
+                                    return true
+                                End If
+                        End Select
+                        
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void CaseWithNestedCase_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Dim j As Integer = i * 2
+                        Select Case i
+                            Case 10:
+                                Select Case i {
+                                    Case 20
+                                        return false
+                                End Select
+                                return true
+                        End Select
+                        
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void CaseWithNestedCaseWithNestedIf_ShouldHave_NestingLevel3()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Dim j As Integer = i * 2
+                        Select Case i
+                            Case 10
+                                Select Case j
+                                    Case 20
+                                        If (i+j == 30) Then
+                                            return false
+                                        End If
+                                End Select
+                                return true
+                                break;
+                        End Select
+                        
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(3);
+        }
+
+        [TestMethod]
+        public void TwoCaseStatements_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Select Case i 
+                            Case 10
+                                return true
+                        End Select
+
+                        Select Case i
+                            Case 20
+                                return false
+                        End Select
+
+                        return false
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
     }
 }

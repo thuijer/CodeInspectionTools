@@ -115,6 +115,7 @@
     <Compile Include="CodeMetrics\VisualBasic\CommentLocator.cs" />
     <Compile Include="CodeMetrics\ICodeAnalyzer.cs" />
     <Compile Include="CodeMetrics\VisualBasic\MethodLength.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\NestingLevel.cs" />
     <Compile Include="CodeMetrics\VisualBasic\VisualBasicAnalyzer.cs" />
     <Compile Include="Components\Project.cs" />
     <Compile Include="Components\SourceFileAnalyzer.cs" />
