@@ -107,8 +107,10 @@
     <Compile Include="CodeMetrics\CSharp\CommentLocator.cs" />
     <Compile Include="CodeMetrics\CSharp\ControlFlowComplexity.cs" />
     <Compile Include="CodeMetrics\CSharp\CSharpAnalyzer.cs" />
+    <Compile Include="CodeMetrics\CSharp\NestingLevel.cs" />
     <Compile Include="CodeMetrics\MethodLengthScore.cs" />
     <Compile Include="CodeMetrics\MethodScore.cs" />
+    <Compile Include="CodeMetrics\NestingLevelScore.cs" />
     <Compile Include="CodeMetrics\VagueToDoComment.cs" />
     <Compile Include="CodeMetrics\VisualBasic\CommentLocator.cs" />
     <Compile Include="CodeMetrics\ICodeAnalyzer.cs" />

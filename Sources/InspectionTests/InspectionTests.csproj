@@ -119,6 +119,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CodeMetricsTests\CSharp\ControlFlowComplexityTests.cs" />
+    <Compile Include="CodeMetricsTests\CSharp\CsharpMetricTest.cs" />
+    <Compile Include="CodeMetricsTests\CSharp\NestingLevelTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\ControlFlowComplexityTests.cs" />
     <Compile Include="ComponentTests\ProjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

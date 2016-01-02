@@ -1,9 +1,6 @@
 ﻿using Inspector.CodeMetrics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inspector.Components
 {
@@ -15,16 +12,16 @@ namespace Inspector.Components
         {
         }
 
-        public void AddCodeMetric(ICodeMetricAnalyzer analyzer)
+        public void AddAnalyzer(ICodeMetricAnalyzer analyzer)
         {
             analyzers.Add(analyzer);
         }
 
-        public IEnumerable<SourceFile> Analyze(Solution solution)
+        public IEnumerable<SourceFile> AppendCodeMetrics(IEnumerable<SourceFile> sourceFiles)
         {
-            var files = solution.SourceFiles.ToList();
-            files.ForEach(sf => sf.CalculateMetricsWith(analyzers));
-            return files;
+            var analyzedFiles = sourceFiles.ToList();
+            analyzedFiles.ForEach(sf => sf.CalculateMetricsWith(analyzers));
+            return analyzedFiles;
         }
     }
 }

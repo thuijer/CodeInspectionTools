@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
-namespace InspectionTests.Analyzers.VisualBasic
+namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
     public class ControlFlowComplexityTests

@@ -1,17 +1,15 @@
 ﻿using FluentAssertions;
 using Inspector.CodeMetrics.CSharp;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class ControlFlowComplexityTests : CsharpMetricTest
+    public class NestingLevelTests : CsharpMetricTest
     {
         [TestMethod]
-        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
+        public void EmptyMethod_ShouldHave_NestingLevel0()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -27,7 +25,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -36,7 +34,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void SimpleIf_ShouldReturn_MethodWithScoreOf_1()
+        public void SingleIfStatement_ShouldHave_NestingLevel1()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -47,15 +45,15 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        if (i == 10) 
+                        if (i > 10) {
                             return true;
-
+                        }
                         return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -63,9 +61,8 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             results.First().Score.Should().Be(1);
         }
 
-
         [TestMethod]
-        public void IfElseIf_ShouldReturn_MethodWithScoreOf_2()
+        public void NestedIfStatement_ShouldHave_NestingLevel2()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -76,19 +73,16 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        if (i == 10) 
-                            return true;
-                        else if (i>10) 
-                            return true;
-                        else
-                            return false;
+                        if (i > 10) 
+                            if (true) 
+                                return true;                            
                         
                         return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -96,9 +90,8 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             results.First().Score.Should().Be(2);
         }
 
-
         [TestMethod]
-        public void IfElseIfAndReturnWithExpression_ShouldReturn_MethodWithScoreOf_3()
+        public void TwoIfStatements_ShouldHave_NestingLevel1()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -109,17 +102,84 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        if (i == 10) 
+                        if (i > 10) 
                             return true;
-                        else if (i>10) 
-                            return true;                        
-
-                        return i==0;
+                        
+                        if (i < 0) 
+                            return true;                            
+                        
+                        return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
+        }
+        [TestMethod]
+        public void NestedIfStatementWithBlocks_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        if (i > 10)
+                        {
+                            if (true)
+                            {
+                                return true;                            
+                            }
+                        }
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void NestedIfStatementsWithBlocks_ShouldHave_NestingLevel3()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        if (i > 10) 
+                        {
+                            if (true) 
+                            {
+                                if (i==0) 
+                                {
+                                    return true; 
+                                }
+                            }
+                        }
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -128,7 +188,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void IfWithAnd_ShouldReturn_MethodWithScoreOf_3()
+        public void NestedIfStatements_ShouldHave_NestingLevel3()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -139,14 +199,17 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        var check = false;
-                        if ((i == 10) && (check==true))
-                            return true;
+                        if (i > 10) 
+                            if (true) 
+                                if (i==0)
+                                    return true; 
+                        
+                        return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -155,8 +218,8 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void SingleLineIf_ShouldReturn_MethodWithScoreOf_1()
-        {
+        public void SimpleCase_ShouldHave_NestingLevel1()
+        {            
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
                 using System.Text;
@@ -166,12 +229,21 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        if (i == 10) return true;
+                        switch (i)
+                        {
+                            case 10:
+                                return true;
+                                break;
+                            default:
+                                break;
+                        };
+                        
+                        return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -180,7 +252,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void SelectCaseWith1Option_ShouldReturn_MethodWithScoreOf_1()
+        public void CaseWithNestedIf_ShouldHave_NestingLevel2()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -194,48 +266,19 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                         switch (i)
                         {
                             case 10:
+                                if (i>0)
+                                    return true;
                                 break;
-                        }
+                            default:
+                                break;
+                        };
+                        
                         return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void SelectCaseWith2Options_ShouldReturn_MethodWithScoreOf_2()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                using System;
-                using System.Text;
-
-                [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
-                    public bool TestMe(int i) {
-                        switch (i) {
-                            case 0:
-                                return true;
-                                break;
-                            case 1:
-                                return true;
-                                break;
-                        }
-
-                        return false;
-                    }
-                }
-                ");
-
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -244,7 +287,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void SelectCaseWith2OptionsAndEmbeddedIf_ShouldReturn_MethodWithScoreOf_3()
+        public void CaseWithNestedCase_ShouldHave_NestingLevel2()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -255,23 +298,70 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                     public TestClass() { }
                     
                     public bool TestMe(int i) {
-                        var z = true;
-                        switch (i) {
-                            case 0:
-                                if (z == true)  
-                                    return true;       
-                                break;
-                            case 1:
+                        int j = i * 2;
+                        switch (i)
+                        {
+                            case 10:
+                                switch (j) {
+                                    case 20:
+                                        return false;
+                                        break;
+                                }
                                 return true;
                                 break;
-                        }
-
+                            default:
+                                break;
+                        };
+                        
                         return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void CaseWithNestedCaseWithNestedIf_ShouldHave_NestingLevel3()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        int j = i * 2;
+                        switch (i)
+                        {
+                            case 10:
+                                switch (j) {
+                                    case 20:
+                                        if (i+j == 30)
+                                        {
+                                            return false;
+                                        }
+                                        break;
+                                }
+                                return true;
+                                break;
+                            default:
+                                break;
+                        };
+                        
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -280,7 +370,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void ReturnWithExpression_ShouldReturn_MethodWithScoreOf_1()
+        public void ForLoop_ShouldHave_NestingLevel1()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -290,66 +380,17 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 public class TestClass {
                     public TestClass() { }
                     
-                    public bool TestMe(int i) {
-                        return i > 0;
-                    }
-                }
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void IfWithBoolean_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                using System;
-                using System.Text;
-
-                [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
-                    public bool TestMe(int i) {
-                        if (true) return false; else return true;
-                    }
-                }
-                ");
-
-            var sut = new ControlFlowComplexity();
-            var results = sut.GetMetrics(parsedNode);
-
-            results.Count().Should().Be(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(1);
-        }
-
-        [TestMethod]
-        public void IfWithBooleanMultiLine_ShouldReturn_MethodWithScoreOf_1()
-        {
-            var parsedNode = GetSourceAsSyntaxTree(@"
-                using System;
-                using System.Text;
-
-                [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
-                    public bool TestMe(int i) {
-                        if (true)
-                            return false;
+                    public bool TestMe(int i) {                        
+                        for (int j=0; j<i; j++) {
+                            //nothing here
+                        };
                         
-                        return true;
+                        return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
@@ -358,7 +399,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
-        public void ElseIfWithBoolean_ShouldReturn_MethodWithScoreOf_2()
+        public void IfWithNestedForLoop_ShouldHave_NestingLevel2()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
                 using System;
@@ -368,16 +409,48 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 public class TestClass {
                     public TestClass() { }
                     
-                    public bool TestMe(int i) {
-                        if (true)
-                            return false;
-                        else if (false)
-                            return true;
+                    public bool TestMe(int i) {    
+                        if (i > 10) {                    
+                            for (int j=0; j<i; j++) {
+                                //nothing here
+                            };
+                        }
+                        return false;
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void ForLoopWithNestedIf_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {                                              
+                        for (int j=0; j<i; j++) {
+                            if (j > 10) {
+                                //nothing here
+                            }
+                        };
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
             var results = sut.GetMetrics(parsedNode);
 
             results.Count().Should().Be(1);
