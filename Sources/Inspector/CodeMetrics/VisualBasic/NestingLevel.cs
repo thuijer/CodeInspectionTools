@@ -24,6 +24,20 @@ namespace Inspector.CodeMetrics.VisualBasic
         }
         private class Walker : VisualBasicSyntaxWalker
         {
+            public override void VisitWhileBlock(WhileBlockSyntax node)
+            {
+                IncreaseLevel();
+                base.VisitWhileBlock(node);
+                DecreaseLevel();
+            }
+
+            public override void VisitDoLoopBlock(DoLoopBlockSyntax node)
+            {
+                IncreaseLevel();
+                base.VisitDoLoopBlock(node);
+                DecreaseLevel();
+            }
+
             public override void VisitSingleLineIfStatement(SingleLineIfStatementSyntax node)
             {
                 IncreaseLevel();

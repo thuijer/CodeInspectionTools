@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace Inspector.CodeMetrics.CSharp
 {
@@ -49,12 +46,25 @@ namespace Inspector.CodeMetrics.CSharp
                     MaxLevel = currentLevel;
             }
 
-            public override void VisitCaseSwitchLabel(CaseSwitchLabelSyntax node)
+            public override void VisitSwitchStatement(SwitchStatementSyntax node)
             {
                 IncreaseLevel();
-                base.VisitCaseSwitchLabel(node);
+                base.VisitSwitchStatement(node);
+                DecreaseLevel();
+            }
 
-                //Do not decrease, because CaseSwitchLabel works differently then if
+            public override void VisitWhileStatement(WhileStatementSyntax node)
+            {
+                IncreaseLevel();
+                base.VisitWhileStatement(node);
+                DecreaseLevel();
+            }
+
+            public override void VisitDoStatement(DoStatementSyntax node)
+            {
+                IncreaseLevel();
+                base.VisitDoStatement(node);
+                DecreaseLevel();
             }
 
             public override void VisitForStatement(ForStatementSyntax node)

@@ -327,6 +327,45 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
+        public void TwoCaseBlocks_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        int j = i * 2;
+                        switch (i)
+                        {
+                            case 10:                                
+                                return true;
+                                break;
+                            default:
+                                break;
+                        };
+                        switch (j) {
+                                    case 20:
+                                        return false;
+                                        break;
+                                };
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
         public void CaseWithNestedCaseWithNestedIf_ShouldHave_NestingLevel3()
         {
             var parsedNode = GetSourceAsSyntaxTree(@"
@@ -457,5 +496,95 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(2);
         }
+
+        [TestMethod]
+        public void While_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        while (i > 10) {
+                            i--;
+                        }
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void TwoWhile_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        while (i > 10) {
+                            i--;
+                        }
+                        while (i > 10) {
+                            i--;
+                        }
+
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void DoWhile_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass() { }
+                    
+                    public bool TestMe(int i) {
+                        do  {
+                            i--;
+                        } while (i > 10);
+
+                        return false;
+                    }
+                }
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.First().Score.Should().Be(1);
+        }
+
     }
 }

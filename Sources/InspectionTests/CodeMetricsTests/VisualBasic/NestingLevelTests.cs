@@ -326,5 +326,120 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
+
+        [TestMethod]
+        public void WhileLoop_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        While i < 10
+                            i = i - 1
+                        End While
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void RepeatUntilLoop_ShouldHave_NestingLevel1()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Do Until i < 0
+                            i = i - 1
+                        Loop
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void WhileLoopWithNestedWhile_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Dim j As Integer = 5
+                        While i < 10
+                            While j > 10 
+                                i = i - 1
+                            End While
+                        End While
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void WhileLoopWithNestedIf_ShouldHave_NestingLevel2()
+        {
+            var parsedNode = GetSourceAsSyntaxTree(@"
+                Imports System
+                Imports System.Text
+
+                <Serializable>_
+                Public Class TestClass
+                    Sub New()
+                    
+                    Public Function TestMe(i as Integer) As Boolean
+                        Dim j As Integer = 5
+                        While i < 10
+                            If i > j Then
+                                j = i
+                            End If
+                            i = i - 1
+                        End While
+                    End Function
+                End Class
+                ");
+
+            var sut = new NestingLevel();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Count().Should().Be(1);
+            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.First().Score.Should().Be(2);
+        }
     }
 }
