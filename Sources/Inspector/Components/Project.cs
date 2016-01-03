@@ -50,4 +50,20 @@ namespace Inspector
             }
         }
     }
+
+    public class WebProject : Project
+    {
+        public WebProject(string projectGuid, string projectName, string absolutePath) : base(projectGuid, projectName, absolutePath)
+        {
+
+        }
+    }
+
+    public class UnsupportedProject : Project
+    {
+        public UnsupportedProject(string projectGuid, string projectName, string absolutePath) : base(projectGuid, projectName, absolutePath)
+        {
+
+        }
+    }
 }
