@@ -102,6 +102,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeMetrics\CSharp\MagicString.cs" />
     <Compile Include="CodeMetrics\CSharp\MagicNumber.cs" />
     <Compile Include="CodeMetrics\Generic\Comment.cs" />
     <Compile Include="CodeMetrics\Scores\ControlFlowComplexityScore.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="CodeMetrics\CSharp\CSharpAnalyzer.cs" />
     <Compile Include="CodeMetrics\CSharp\NestingLevel.cs" />
     <Compile Include="CodeMetrics\CSharp\VagueToDo.cs" />
+    <Compile Include="CodeMetrics\Scores\MagicStringScore.cs" />
     <Compile Include="CodeMetrics\Scores\MagicNumberScore.cs" />
     <Compile Include="CodeMetrics\Scores\MethodLengthScore.cs" />
     <Compile Include="CodeMetrics\Scores\MethodScore.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="CodeMetrics\Scores\VagueToDoScore.cs" />
     <Compile Include="CodeMetrics\VisualBasic\CommentLocator.cs" />
     <Compile Include="CodeMetrics\ICodeAnalyzer.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\MagicString.cs" />
     <Compile Include="CodeMetrics\VisualBasic\MagicNumber.cs" />
     <Compile Include="CodeMetrics\VisualBasic\MethodLength.cs" />
     <Compile Include="CodeMetrics\VisualBasic\NestingLevel.cs" />

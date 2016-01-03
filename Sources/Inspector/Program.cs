@@ -55,6 +55,10 @@ namespace Inspector
             //SPM-1
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MagicNumber());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MagicNumber());
+
+            //SPM-2
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MagicString());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MagicString());
         }
     }
 }

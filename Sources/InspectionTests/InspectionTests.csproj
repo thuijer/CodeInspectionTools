@@ -120,10 +120,12 @@
   <ItemGroup>
     <Compile Include="CodeMetricsTests\CSharp\ControlFlowComplexityTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\CsharpMetricTest.cs" />
+    <Compile Include="CodeMetricsTests\CSharp\MagicStringTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\MagicNumberTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\NestingLevelTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\VagueToDoTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\ControlFlowComplexityTests.cs" />
+    <Compile Include="CodeMetricsTests\VisualBasic\MagicStringTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\MagicNumberTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\NestingLevelTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\VagueToDoTests.cs" />
