@@ -56,6 +56,10 @@ namespace Inspector
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.DisabledCode());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.DisabledCode());
 
+            //WIP-3
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.EmptyStatementBlock());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.EmptyStatementBlock());
+
             //SPM-1
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MagicNumber());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MagicNumber());
