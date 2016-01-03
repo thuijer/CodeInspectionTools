@@ -19,10 +19,29 @@ namespace Inspector.IfSQ
             File = sf.FileName;
             Loc = sf.LinesOfCode;
 
+            Wip1 = sf.MethodScores.OfType<VagueToDoScore>().Sum(ms => ms.Score);
             Sp1 = sf.MethodScores.OfType<MethodLengthScore>().Where(ms => ms.Score > Sp1ScoreTreshold).Sum(ms => ms.Score - Sp1ScoreTreshold);
-            Sp2 = sf.MethodScores.OfType<NestingLevelScore>().Where(ms => ms.Score > Sp2ScoreTreshold).Sum(ms=>ms.LineCountPerLevel[Sp2ScoreTreshold+1]);
-            Sp3 = sf.MethodScores.OfType<ControlFlowComplexityScore>().Where(ms => ms.Score > Sp3ScoreTreshold).Sum(ms => ms.Score- Sp3ScoreTreshold);
+            Sp2 = sf.MethodScores.OfType<NestingLevelScore>().Where(ms => ms.Score > Sp2ScoreTreshold).Sum(ms => ms.LineCountPerLevel[Sp2ScoreTreshold + 1]);
+            Sp3 = sf.MethodScores.OfType<ControlFlowComplexityScore>().Where(ms => ms.Score > Sp3ScoreTreshold).Sum(ms => ms.Score - Sp3ScoreTreshold);
         }
+
+        public Level2Score(int totalLines, IEnumerable<Level2Score> scores)
+        {
+            Project = "Total";
+            File = "All";
+            Loc = totalLines;
+
+            Wip1 = scores.Sum(s => s.Wip1);
+            Wip2 = scores.Sum(s => s.Wip2);
+            Wip3 = scores.Sum(s => s.Wip3);
+            Sp1 = scores.Sum(s => s.Sp1);
+            Sp2 = scores.Sum(s => s.Sp2);
+            Sp3 = scores.Sum(s => s.Sp3);
+            Spm1 = scores.Sum(s => s.Spm1);
+            Spm2 = scores.Sum(s => s.Spm2);
+            Spm3 = scores.Sum(s => s.Spm3);
+        }
+
         public string Solution { get; private set; }
         public string Project { get; private set; }
         public string File { get; private set; }
@@ -52,31 +71,46 @@ namespace Inspector.IfSQ
         {
             get
             {
-                if (DefectsPerKloc <= 1)
-                    return "AAA";
-                if (DefectsPerKloc <= 2)
-                    return "AA";
-                if (DefectsPerKloc <= 5)
-                    return "A";
-                if (DefectsPerKloc <= Sp3ScoreTreshold)
-                    return "B";
-                if (DefectsPerKloc <= 20)
-                    return "C";
-                if (DefectsPerKloc <= 50)
-                    return "D";
-                if (DefectsPerKloc <= 100)
-                    return "E";
-                if (DefectsPerKloc <= 200)
-                    return "F";
-                if (DefectsPerKloc <= 500)
-                    return "FF";
-                return "FFF";
+                return RatingFromDefectsPerKloc(DefectsPerKloc);
             }
         }
 
+        /// <summary>
+        /// Get IfSQ level 2 rating based on defects per 1000 lines of code (kloc)
+        /// </summary>
+        /// <param name="defectsKloc">defects per 1000 lines of code</param>
+        /// <returns></returns>
+        // Static method to allow calculations outside this class to use the rating 
+        public static string RatingFromDefectsPerKloc(int defectsKloc)
+        {
+            if (defectsKloc <= 1)
+                return "AAA";
+            if (defectsKloc <= 2)
+                return "AA";
+            if (defectsKloc <= 5)
+                return "A";
+            if (defectsKloc <= 10)
+                return "B";
+            if (defectsKloc <= 20)
+                return "C";
+            if (defectsKloc <= 50)
+                return "D";
+            if (defectsKloc <= 100)
+                return "E";
+            if (defectsKloc <= 200)
+                return "F";
+            if (defectsKloc <= 500)
+                return "FF";
+            return "FFF";
+        }
+
+        public static string HeaderString()
+        {
+            return $"\"Project\",\"File\",\"Loc\",\"DefectsFound\",\"DefectsPerKloc\",\"Rating\",\"Wip1\",\"Wip2\",\"Wip3\",\"Sp1\",\"Sp2\",\"Sp3\",\"Spm1\",\"Spm2\",\"Spm3\"";
+        }
         public override string ToString()
         {
-            return $"\"{Project}\",\"{File}\",\"{Rating}\",{DefectsPerKloc},{Sp1},{Sp2},{Sp3}, {Total}, {Loc}";
+            return $"\"{Project}\",\"{File}\",{Loc},{Total},{DefectsPerKloc},\"{Rating}\",{Wip1},{Wip2},{Wip3},{Sp1},{Sp2},{Sp3},{Spm1},{Spm2},{Spm3}";
         }
     }
 }

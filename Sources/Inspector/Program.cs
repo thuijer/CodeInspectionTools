@@ -12,28 +12,36 @@ namespace Inspector
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("--- Reading solutionfile contents ---");
             var info = new Solution(args.First());
 
             var sourceAnalyzer = new SourceFileAnalyzer();
-            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.ControlFlowComplexity());
-            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MethodLength());
-            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.NestingLevel());
+            AddVisualBasicAnalyzers(sourceAnalyzer);
+            AddCSharpAnalyzers(sourceAnalyzer);
+
+            var sourceFilesWithCodeMetrics = sourceAnalyzer.AppendCodeMetrics(info.SourceFiles);
+            Console.WriteLine(Level2Score.HeaderString());
+            var ifsqScores = sourceFilesWithCodeMetrics.Select(sf => new Level2Score(sf));
+            ifsqScores.OrderByDescending(s => s.Rating).ToList().ForEach(s => Console.WriteLine(s));
+
+            int totalLines = sourceFilesWithCodeMetrics.Sum(sf => sf.LinesOfCode);
+            var total = new Level2Score(totalLines, ifsqScores);
+            Console.WriteLine(total);
+        }
+
+        private static void AddCSharpAnalyzers(SourceFileAnalyzer sourceAnalyzer)
+        {
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MethodLength());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.ControlFlowComplexity());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.NestingLevel());
-
-            Console.WriteLine("--- Analyzing sourcefiles ---");
-            var sourceFilesWithCodeMetrics = sourceAnalyzer.AppendCodeMetrics(info.SourceFiles);
-
-            Console.WriteLine($"Solution based linecount: {sourceFilesWithCodeMetrics.Sum(sf => sf.LinesOfCode)}");
-
-            sourceFilesWithCodeMetrics.Select(sf => new Level2Score(sf)).OrderByDescending(s=>s.Rating).ToList().ForEach(s => Console.WriteLine(s));
-
-            Console.WriteLine("--- Analyzing done ---");
-            Console.ReadLine();
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.VagueToDo());
         }
 
-
+        private static void AddVisualBasicAnalyzers(SourceFileAnalyzer sourceAnalyzer)
+        {
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.ControlFlowComplexity());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MethodLength());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.NestingLevel());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.VagueToDo());
+        }
     }
 }

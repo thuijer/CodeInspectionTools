@@ -18,7 +18,7 @@ namespace Inspector
             project.AddSourceFile(this);
 
             FileName = srcFile;
-            Code = code;            
+            Code = code;
             LinesOfCode = Code.Split('\n').Count();
             MethodScores = new List<MethodScore>();
         }
