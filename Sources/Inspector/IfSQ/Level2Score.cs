@@ -23,6 +23,7 @@ namespace Inspector.IfSQ
             Spm1 = sf.MethodScores.OfType<MagicNumberScore>().Sum(ms => ms.Score);
             Spm2 = sf.MethodScores.OfType<MagicStringScore>().Sum(ms => ms.Score);
             Wip1 = sf.MethodScores.OfType<VagueToDoScore>().Sum(ms => ms.Score);
+            Wip2 = sf.MethodScores.OfType<DisabledCodeScore>().Sum(ms => ms.Score);
             Sp1 = sf.MethodScores.OfType<MethodLengthScore>().Where(ms => ms.Score > Sp1ScoreTreshold).Sum(ms => ms.Score - Sp1ScoreTreshold);
             Sp2 = sf.MethodScores.OfType<NestingLevelScore>().Where(ms => ms.Score > Sp2ScoreTreshold).Sum(ms => ms.LineCountPerLevel[Sp2ScoreTreshold + 1]);
             Sp3 = sf.MethodScores.OfType<ControlFlowComplexityScore>().Where(ms => ms.Score > Sp3ScoreTreshold).Sum(ms => ms.Score - Sp3ScoreTreshold);

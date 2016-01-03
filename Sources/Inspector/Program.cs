@@ -52,6 +52,10 @@ namespace Inspector
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.VagueToDo());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.VagueToDo());
 
+            //WIP-2
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.DisabledCode());
+            sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.DisabledCode());
+
             //SPM-1
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MagicNumber());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MagicNumber());
@@ -59,6 +63,8 @@ namespace Inspector
             //SPM-2
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.CSharp.MagicString());
             sourceAnalyzer.AddAnalyzer(new CodeMetrics.VisualBasic.MagicString());
+
+
         }
     }
 }
