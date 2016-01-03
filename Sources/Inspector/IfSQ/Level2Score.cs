@@ -76,7 +76,7 @@ namespace Inspector.IfSQ
 
         public override string ToString()
         {
-            return $"\"{Project}\",\"{File}\",\"{Rating}\",{DefectsPerKloc},{Sp1},{Sp2},{Sp3}";
+            return $"\"{Project}\",\"{File}\",\"{Rating}\",{DefectsPerKloc},{Sp1},{Sp2},{Sp3}, {Total}, {Loc}";
         }
     }
 }

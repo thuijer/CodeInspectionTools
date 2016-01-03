@@ -102,20 +102,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeMetrics\Comment.cs" />
-    <Compile Include="CodeMetrics\ControlFlowComplexityScore.cs" />
+    <Compile Include="CodeMetrics\Generic\Comment.cs" />
+    <Compile Include="CodeMetrics\Scores\ControlFlowComplexityScore.cs" />
     <Compile Include="CodeMetrics\CSharp\CommentLocator.cs" />
     <Compile Include="CodeMetrics\CSharp\ControlFlowComplexity.cs" />
     <Compile Include="CodeMetrics\CSharp\CSharpAnalyzer.cs" />
     <Compile Include="CodeMetrics\CSharp\NestingLevel.cs" />
-    <Compile Include="CodeMetrics\MethodLengthScore.cs" />
-    <Compile Include="CodeMetrics\MethodScore.cs" />
-    <Compile Include="CodeMetrics\NestingLevelScore.cs" />
-    <Compile Include="CodeMetrics\VagueToDoComment.cs" />
+    <Compile Include="CodeMetrics\CSharp\VagueToDo.cs" />
+    <Compile Include="CodeMetrics\Scores\MethodLengthScore.cs" />
+    <Compile Include="CodeMetrics\Scores\MethodScore.cs" />
+    <Compile Include="CodeMetrics\Scores\NestingLevelScore.cs" />
+    <Compile Include="CodeMetrics\Scores\VagueToDoScore.cs" />
     <Compile Include="CodeMetrics\VisualBasic\CommentLocator.cs" />
     <Compile Include="CodeMetrics\ICodeAnalyzer.cs" />
     <Compile Include="CodeMetrics\VisualBasic\MethodLength.cs" />
     <Compile Include="CodeMetrics\VisualBasic\NestingLevel.cs" />
+    <Compile Include="CodeMetrics\VisualBasic\VagueToDo.cs" />
     <Compile Include="CodeMetrics\VisualBasic\VisualBasicAnalyzer.cs" />
     <Compile Include="Components\Project.cs" />
     <Compile Include="Components\SourceFileAnalyzer.cs" />
@@ -131,7 +133,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CodeMetrics\CSharp\MethodLength.cs" />
     <Compile Include="CodeMetrics\VisualBasic\ControlFlowComplexity.cs" />
-    <Compile Include="CodeMetrics\CommentLocator.cs" />
+    <Compile Include="CodeMetrics\Generic\CommentLocator.cs" />
     <Compile Include="Components\Solution.cs" />
   </ItemGroup>
   <ItemGroup>
