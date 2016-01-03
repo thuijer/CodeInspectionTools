@@ -1,4 +1,5 @@
 ﻿using Inspector.CodeMetrics;
+using Inspector.CodeMetrics.Scores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Inspector.IfSQ
             File = sf.FileName;
             Loc = sf.LinesOfCode;
 
+            Spm1 = sf.MethodScores.OfType<MagicNumberScore>().Sum(ms => ms.Score);
             Wip1 = sf.MethodScores.OfType<VagueToDoScore>().Sum(ms => ms.Score);
             Sp1 = sf.MethodScores.OfType<MethodLengthScore>().Where(ms => ms.Score > Sp1ScoreTreshold).Sum(ms => ms.Score - Sp1ScoreTreshold);
             Sp2 = sf.MethodScores.OfType<NestingLevelScore>().Where(ms => ms.Score > Sp2ScoreTreshold).Sum(ms => ms.LineCountPerLevel[Sp2ScoreTreshold + 1]);

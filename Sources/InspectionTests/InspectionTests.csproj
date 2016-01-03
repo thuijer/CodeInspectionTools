@@ -124,6 +124,7 @@
     <Compile Include="CodeMetricsTests\CSharp\NestingLevelTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\VagueToDoTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\ControlFlowComplexityTests.cs" />
+    <Compile Include="CodeMetricsTests\VisualBasic\MagicNumberTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\NestingLevelTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\VagueToDoTests.cs" />
     <Compile Include="CodeMetricsTests\VisualBasic\VisualBasicMetricTest.cs" />
