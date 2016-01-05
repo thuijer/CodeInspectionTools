@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspector.CodeMetrics.CSharp;
+﻿using System.Linq;
 using FluentAssertions;
-using System.Linq;
+using InspectionTests.Builders;
+using Inspector.CodeMetrics.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class EmptyStatementBlockTests : CsharpMetricTest
+    public class EmptyStatementBlockTests
     {
         [TestMethod]
         public void SimpleReturn_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -37,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void EmptyCatchBlock_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -66,7 +66,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void EmptyCatchBlockWithComment_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

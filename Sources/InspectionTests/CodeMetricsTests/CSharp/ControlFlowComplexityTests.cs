@@ -1,19 +1,19 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
+using InspectionTests.Builders;
 using Inspector.CodeMetrics.CSharp;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class ControlFlowComplexityTests : CsharpMetricTest
+    public class ControlFlowComplexityTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SimpleIf_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -67,7 +67,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfElseIf_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -100,7 +100,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfElseIfAndReturnWithExpression_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -130,7 +130,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithAnd_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -157,7 +157,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SingleLineIf_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -182,7 +182,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SelectCaseWith1Option_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -212,7 +212,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SelectCaseWith2Options_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -246,7 +246,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SelectCaseWith2OptionsAndEmbeddedIf_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -282,7 +282,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ReturnWithExpression_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -307,7 +307,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithBoolean_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -332,7 +332,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithBooleanMultiLine_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -360,7 +360,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ElseIfWithBoolean_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

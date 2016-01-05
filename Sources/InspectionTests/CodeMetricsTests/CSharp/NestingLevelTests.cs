@@ -1,17 +1,18 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
+using InspectionTests.Builders;
 using Inspector.CodeMetrics.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class NestingLevelTests : CsharpMetricTest
+    public class NestingLevelTests 
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_NestingLevel0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -36,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SingleIfStatement_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -64,7 +65,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NestedIfStatement_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -93,7 +94,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void TwoIfStatements_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -123,7 +124,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NestedIfStatementWithBlocks_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -155,7 +156,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NestedIfStatementsWithBlocks_ShouldHave_NestingLevel3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -190,7 +191,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NestedIfStatements_ShouldHave_NestingLevel3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -220,7 +221,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SimpleCase_ShouldHave_NestingLevel1()
         {            
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -254,7 +255,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void CaseWithNestedIf_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -289,7 +290,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void CaseWithNestedCase_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -329,7 +330,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void TwoCaseBlocks_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -368,7 +369,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void CaseWithNestedCaseWithNestedIf_ShouldHave_NestingLevel3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -411,7 +412,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ForLoop_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -440,7 +441,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithNestedForLoop_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -470,7 +471,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ForLoopWithNestedIf_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -500,7 +501,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void While_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -528,7 +529,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void TwoWhile_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -560,7 +561,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void DoWhile_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

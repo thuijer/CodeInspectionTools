@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Inspector.CodeMetrics.CSharp;
 using FluentAssertions;
 using System.Linq;
+using InspectionTests.Builders;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class MagicStringTests : CsharpMetricTest
+    public class MagicStringTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -37,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void StringDeclaration_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -63,7 +63,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -92,7 +92,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ConditionWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -118,7 +118,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void SwitchWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -150,7 +150,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void WhileWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
