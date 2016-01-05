@@ -21,7 +21,7 @@ namespace Inspector.CodeMetrics.CSharp
                 
         private string GetClassName(MethodDeclarationSyntax m)
         {
-            var classBlock = m.Parent as Microsoft.CodeAnalysis.CSharp.Syntax.ClassDeclarationSyntax;
+            var classBlock = m.Parent as ClassDeclarationSyntax;
             if (classBlock != null)
                 return classBlock.Identifier.ValueText;
 
