@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Inspector.CodeMetrics.CSharp
 {
@@ -24,9 +23,12 @@ namespace Inspector.CodeMetrics.CSharp
             );
 
         }
+
         private class Walker : CSharpSyntaxWalker
         {
             private readonly Dictionary<int, int> lineCountPerLevel = new Dictionary<int, int>();
+            private int currentLevel = 0;
+            public int MaxLevel { get; private set; } = 0;
 
             public Dictionary<int,int> LineCountPerLevel
             {
@@ -35,6 +37,7 @@ namespace Inspector.CodeMetrics.CSharp
                     return lineCountPerLevel;
                 }
             }
+
             public override void VisitIfStatement(IfStatementSyntax node)
             {
                 IncreaseLevel(node.Statement.ToString());
@@ -96,8 +99,6 @@ namespace Inspector.CodeMetrics.CSharp
                 base.VisitForStatement(node);
                 DecreaseLevel();
             }
-            private int currentLevel = 0;
-            public int MaxLevel { get; private set; } = 0;
         }
     }
 }

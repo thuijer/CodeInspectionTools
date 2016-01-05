@@ -13,10 +13,8 @@ namespace Inspector.CodeMetrics.VisualBasic
     {
         public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
         {
-            return GetMethods(node).ToList().Select(m => {
-                int score = CalculateScore(m);
-                return CreateScore<VagueToDoScore>(m, score);
-            });          
+            return GetMethods(node)
+                .Select(m => CreateScore<VagueToDoScore>(m, CalculateScore(m)));          
         }
 
         private int CalculateScore(MethodBlockSyntax m)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -21,14 +18,15 @@ namespace Inspector.CodeMetrics.VisualBasic
                 Score = score
             };
         }
+
         private string GetClassName(MethodBlockSyntax m)
         {
 
-            var moduleBlock = m.Parent as Microsoft.CodeAnalysis.VisualBasic.Syntax.ModuleBlockSyntax;
+            var moduleBlock = m.Parent as ModuleBlockSyntax;
             if (moduleBlock != null)
                 return moduleBlock.ModuleStatement.Identifier.ValueText;
 
-            var classBlock = m.Parent as Microsoft.CodeAnalysis.VisualBasic.Syntax.ClassBlockSyntax;
+            var classBlock = m.Parent as ClassBlockSyntax;
             if (classBlock != null)
                 return classBlock.ClassStatement.Identifier.ValueText;
 

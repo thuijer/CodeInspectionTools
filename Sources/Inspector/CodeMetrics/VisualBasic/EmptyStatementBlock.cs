@@ -1,8 +1,8 @@
-﻿using Inspector.CodeMetrics.Scores;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Inspector.CodeMetrics.Scores;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Inspector.CodeMetrics.VisualBasic
 {
@@ -21,43 +21,25 @@ namespace Inspector.CodeMetrics.VisualBasic
         {
             var nodes = m.DescendantNodes();
 
-            var emptyCatchClauses = nodes.OfType<CatchBlockSyntax>().Where(s =>
-            {
-                if (s.Statements.Count == 0)
-                    return !HasCommentWhyEmpty(s);
-                else
-                    return false;
-            });
-            var emptyFinallyClauses = nodes.OfType<FinallyBlockSyntax>().Where(s =>
-            {
-                if (s.Statements.Count == 0)
-                    return !HasCommentWhyEmpty(s);
-                else
-                    return false;
-            });
-            var emptyIf = nodes.OfType<MultiLineIfBlockSyntax>().Where(s =>
-            {
-                if (s.Statements.Count == 0)
-                    return !HasCommentWhyEmpty(s);
-                else
-                    return false;
-            });
+            var emptyCatchClauses = nodes
+                .OfType<CatchBlockSyntax>()
+                .Where(s => s.Statements.Count == 0 && !HasCommentWhyEmpty(s));
 
-            var emptyElses = nodes.OfType<ElseBlockSyntax>().Where(s =>
-            {
-                if (s.Statements.Count == 0)
-                    return !HasCommentWhyEmpty(s);
-                else
-                    return false;
-            });
+            var emptyFinallyClauses = nodes
+                .OfType<FinallyBlockSyntax>()
+                .Where(s => s.Statements.Count == 0 && !HasCommentWhyEmpty(s));
 
-            var emptyElseIfs = nodes.OfType<ElseIfBlockSyntax>().Where(s =>
-            {
-                if (s.Statements.Count == 0)
-                    return !HasCommentWhyEmpty(s);
-                else
-                    return false;
-            });
+            var emptyIf = nodes
+                .OfType<MultiLineIfBlockSyntax>()
+                .Where(s => s.Statements.Count == 0 && !HasCommentWhyEmpty(s));
+
+            var emptyElses = nodes
+                .OfType<ElseBlockSyntax>()
+                .Where(s => s.Statements.Count == 0 && !HasCommentWhyEmpty(s));
+
+            var emptyElseIfs = nodes
+                .OfType<ElseIfBlockSyntax>()
+                .Where(s => s.Statements.Count == 0 && !HasCommentWhyEmpty(s));
 
             return emptyCatchClauses.Count() + emptyFinallyClauses.Count() + emptyIf.Count() + emptyElses.Count() + emptyElseIfs.Count();
         }

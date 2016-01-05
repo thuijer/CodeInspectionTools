@@ -5,8 +5,6 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inspector.CodeMetrics.VisualBasic
 {
@@ -24,14 +22,15 @@ namespace Inspector.CodeMetrics.VisualBasic
         private int CalculateScore(MethodBlockSyntax method)
         {
             var nodes = method.DescendantNodes();
-            var literals = nodes.OfType<LiteralExpressionSyntax>().Where(bes =>
-                CheckForNumber(bes)
+            var literals = nodes
+                            .OfType<LiteralExpressionSyntax>()
+                            .Where(bes => IsInvalidLiteralNumber(bes)
             );
 
             return literals.Count();
         }
 
-        private bool CheckForNumber(LiteralExpressionSyntax expr)
+        private bool IsInvalidLiteralNumber(LiteralExpressionSyntax expr)
         {
             if (expr == null)
                 return false;
@@ -42,7 +41,7 @@ namespace Inspector.CodeMetrics.VisualBasic
             if (expr.Parent is UnaryExpressionSyntax)
                 return true;
 
-            if (expr != null && expr.IsKind(SyntaxKind.NumericLiteralExpression))
+            if (expr.IsKind(SyntaxKind.NumericLiteralExpression))
             {
                 double value = Double.Parse(expr.Token.ValueText);
                 return (value != 0.0 && value != 1.0);
