@@ -2,16 +2,17 @@
 using Inspector.CodeMetrics.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using InspectionTests.Builders;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class NestingLevelTests : VisualBasicMetricTest
+    public class NestingLevelTests 
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_NestingLevel0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -37,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SingleIfStatement_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -65,7 +66,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void NestedIfStatement_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -95,7 +96,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void TwoIfStatements_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -128,7 +129,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void NestedIfStatements_ShouldHave_NestingLevel3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -160,7 +161,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SimpleCase_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -190,7 +191,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void CaseWithNestedIf_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -222,7 +223,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void CaseWithNestedCase_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -257,7 +258,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void CaseWithNestedCaseWithNestedIf_ShouldHave_NestingLevel3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -295,7 +296,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void TwoCaseStatements_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -330,7 +331,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void WhileLoop_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -357,7 +358,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void RepeatUntilLoop_ShouldHave_NestingLevel1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -384,7 +385,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void WhileLoopWithNestedWhile_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -414,7 +415,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void WhileLoopWithNestedIf_ShouldHave_NestingLevel2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 

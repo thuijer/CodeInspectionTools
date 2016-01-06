@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Inspector.CodeMetrics.VisualBasic;
 using FluentAssertions;
 using System.Linq;
+using InspectionTests.Builders;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class EmptyStatementBlockTests : VisualBasicMetricTest
+    public class EmptyStatementBlockTests 
     {
         [TestMethod]
         public void SimpleReturn_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void EmptyCatch_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -69,7 +69,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void EmptyCatchWithComment_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 

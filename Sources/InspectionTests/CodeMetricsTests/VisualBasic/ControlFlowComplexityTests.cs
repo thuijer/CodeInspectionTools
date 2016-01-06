@@ -1,18 +1,18 @@
 ﻿using FluentAssertions;
 using Inspector.CodeMetrics.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using InspectionTests.Builders;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class ControlFlowComplexityTests : VisualBasicMetricTest
+    public class ControlFlowComplexityTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SimpleIf_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -69,7 +69,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfElseIf_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -104,7 +104,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfElseIfAndReturnWithExpression_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -136,7 +136,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfWithAnd_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -164,7 +164,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SingleLineIf_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -190,7 +190,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SelectCaseWith1Option_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -221,7 +221,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SelectCaseWith2Options_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -254,7 +254,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SelectCaseWith2OptionsAndEmbeddedIf_ShouldReturn_MethodWithScoreOf_3()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -290,7 +290,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void ReturnWithExpression_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -316,7 +316,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfWithBoolean_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -342,7 +342,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfWithBooleanMultiLine_ShouldReturn_MethodWithScoreOf_1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
@@ -370,7 +370,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void ElseIfWithBoolean_ShouldReturn_MethodWithScoreOf_2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
                 Imports System
                 Imports System.Text
 
