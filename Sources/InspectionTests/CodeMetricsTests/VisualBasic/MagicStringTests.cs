@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Inspector.CodeMetrics.VisualBasic;
 using FluentAssertions;
 using System.Linq;
+using InspectionTests.Builders;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class MagicStringTests : VisualBasicMetricTest
+    public class MagicStringTests 
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void DeclarationWithStringLiteral_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -65,7 +65,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -94,7 +94,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SelectCaseWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -125,7 +125,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void ReturnWithStringLiteralConditional_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -152,7 +152,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SingleLineIfWithStringLiteral_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 

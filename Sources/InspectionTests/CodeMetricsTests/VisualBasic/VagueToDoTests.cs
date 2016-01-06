@@ -1,21 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
+using InspectionTests.Builders;
 using Inspector.CodeMetrics.VisualBasic;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
 {
     [TestClass]
-    public class VagueToDoTests : VisualBasicMetricTest
+    public class VagueToDoTests 
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -41,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void MethodWithOneTodo_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -68,7 +65,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void MethodWith2TodoComments_ShouldHave_Score2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -96,7 +93,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void With5DifferentTodoComments_ShouldReturn_Score5()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
