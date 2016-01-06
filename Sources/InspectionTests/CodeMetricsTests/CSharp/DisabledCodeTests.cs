@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspector.CodeMetrics.CSharp;
+﻿using System.Linq;
 using FluentAssertions;
-using System.Linq;
+using InspectionTests.Builders;
+using Inspector.CodeMetrics.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class DisabledCodeTests : CsharpMetricTest
+    public class DisabledCodeTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -37,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NormalComment_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -63,7 +63,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfInComment_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -90,7 +90,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfMultiLineInComment_ShouldHave_Score2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -118,7 +118,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void IfWithStatementBlockInComment_ShouldHave_Score4()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

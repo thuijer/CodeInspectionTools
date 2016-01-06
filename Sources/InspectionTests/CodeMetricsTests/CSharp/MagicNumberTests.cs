@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspector.CodeMetrics.CSharp;
+﻿using System.Linq;
 using FluentAssertions;
-using System.Linq;
+using InspectionTests.Builders;
+using Inspector.CodeMetrics.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class MagicNumberTests : CsharpMetricTest
+    public class MagicNumberTests
     {
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -37,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void Number0or1_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -64,7 +64,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NumberHigherThan1_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -91,7 +91,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NumberHigherThan1AndVariable_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -119,7 +119,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ParameterDefaultValue_Should_NotRaiseScore()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -147,7 +147,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void Case_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -180,7 +180,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void NumberNegative1_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -207,7 +207,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void ReturnWithInlineComparisionAndNumber_ShouldHave_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -232,7 +232,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void Constant_ShouldHave_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

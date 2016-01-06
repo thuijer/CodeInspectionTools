@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Inspector.CodeMetrics.CSharp;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
+using InspectionTests.Builders;
+using Inspector.CodeMetrics.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class VagueToDoTests : CsharpMetricTest
+    public class VagueToDoTests
     {
         [TestMethod]
         public void WithoutComments_ShouldReturn_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -37,7 +37,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void WithOtherComments_ShouldReturn_Score0()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -63,7 +63,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void WitSimpleTodoComment_ShouldReturn_Score1()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -90,7 +90,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void With2TodoComments_ShouldReturn_Score2()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 
@@ -118,7 +118,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         [TestMethod]
         public void With5DifferentTodoComments_ShouldReturn_Score5()
         {
-            var parsedNode = GetSourceAsSyntaxTree(@"
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
                 using System.Text;
 

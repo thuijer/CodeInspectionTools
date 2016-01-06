@@ -118,8 +118,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Builders\CSharpSyntaxTreeBuilder.cs" />
     <Compile Include="CodeMetricsTests\CSharp\ControlFlowComplexityTests.cs" />
-    <Compile Include="CodeMetricsTests\CSharp\CsharpMetricTest.cs" />
     <Compile Include="CodeMetricsTests\CSharp\EmptyStatementBlockTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\DisabledCodeTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\MagicStringTests.cs" />
