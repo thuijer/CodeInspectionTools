@@ -12,7 +12,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void EmptyMethod_ShouldHave_Score0()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void NormalComment_ShouldHave_Score0()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -65,7 +65,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfStatementInComment_ShouldHave_Score1()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -93,7 +93,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void IfStatementBlockInComment_ShouldHave_Score3()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 

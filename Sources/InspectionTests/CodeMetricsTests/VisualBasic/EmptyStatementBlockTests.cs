@@ -12,7 +12,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void SimpleReturn_ShouldHave_Score0()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -38,7 +38,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void EmptyCatch_ShouldHave_Score1()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 
@@ -69,7 +69,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
         [TestMethod]
         public void EmptyCatchWithComment_ShouldHave_Score0()
         {
-            var parsedNode = new VBSyntaxTreeBuilder().GetSourceAsSyntaxTree(@"
+            var parsedNode = new VBSyntaxTreeBuilder().FromSource(@"
                 Imports System
                 Imports System.Text
 

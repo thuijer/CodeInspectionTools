@@ -5,7 +5,7 @@ namespace InspectionTests.Builders
 {
     class VBSyntaxTreeBuilder
     {
-        internal SyntaxNode GetSourceAsSyntaxTree(string vbCode)
+        internal SyntaxNode FromSource(string vbCode)
         {
             var parsedNode = VisualBasicSyntaxTree.ParseText(vbCode);
             return parsedNode.GetRoot();
