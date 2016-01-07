@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace InspectionTests.CodeMetricsTests.CSharp
 {
     [TestClass]
-    public class ControlFlowComplexityTests
+    public class MethodLengthTests
     {
         [TestMethod]
-        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
+        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_2()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -21,22 +21,22 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 public class TestClass {
                     public TestClass() { }
                     
-                    public bool TestMe(int i) {
-                        return false;
+                    public bool TestMe(int i) 
+                    {                        
                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new MethodLength();
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(0);
+            results.First().Score.Should().Be(2);
         }
 
         [TestMethod]
-        public void SimpleIf_ShouldReturn_MethodWithScoreOf_1()
+        public void MethodWith210Lines_ShouldReturn_MethodWithScoreOf_210()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -46,21 +46,226 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 public class TestClass {
                     public TestClass() { }
                     
-                    public bool TestMe(int i) {
+                    public bool TestMe(int i) 
+                    {
                         if (i == 10) 
                             return true;
-
-                        return false;
-                    }
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                        if (i == 10) 
+                            return true;
+                     }
                 }
                 ");
 
-            var sut = new ControlFlowComplexity();
+            var sut = new MethodLength();
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(1);
+            results.First().Score.Should().Be(210);
         }
 
 

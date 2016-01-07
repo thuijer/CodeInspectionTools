@@ -119,6 +119,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Builders\CSharpSyntaxTreeBuilder.cs" />
+    <Compile Include="CodeMetricsTests\CSharp\MethodLengthTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\ControlFlowComplexityTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\EmptyStatementBlockTests.cs" />
     <Compile Include="CodeMetricsTests\CSharp\DisabledCodeTests.cs" />
