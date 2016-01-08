@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System.Collections.Generic;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 
 namespace Inspector.CodeMetrics.VisualBasic
 {
@@ -11,7 +12,7 @@ namespace Inspector.CodeMetrics.VisualBasic
     /// </summary>
     public class ControlFlowComplexity : VisualBasicAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
+        public override IEnumerable<CodeScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node).Select(m => CreateScore<ControlFlowComplexityScore>(m, GetScore(m)));
         }

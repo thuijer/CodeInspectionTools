@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Inspector;
 using FluentAssertions;
+using Inspector.Components;
 
 namespace InspectionTests.ComponentTests
 {

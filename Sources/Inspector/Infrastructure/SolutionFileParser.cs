@@ -1,9 +1,7 @@
 ﻿using Microsoft.Build.Construction;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Inspector.Components;
 
 namespace Inspector.Infrastructure
 {

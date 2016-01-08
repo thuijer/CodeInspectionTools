@@ -1,8 +1,8 @@
-﻿using Inspector.Infrastructure;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Inspector.Infrastructure;
 
-namespace Inspector
+namespace Inspector.Components
 {
     public class Solution
     {

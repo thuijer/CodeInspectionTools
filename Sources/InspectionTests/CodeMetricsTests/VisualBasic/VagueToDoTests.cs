@@ -2,6 +2,7 @@
 using System.Linq;
 using FluentAssertions;
 using InspectionTests.Builders;
+using Inspector.CodeMetrics.Scores;
 using Inspector.CodeMetrics.VisualBasic;
 
 namespace InspectionTests.CodeMetricsTests.VisualBasic
@@ -31,7 +32,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.OfType<MethodScore>().First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(0);
         }
 
@@ -58,7 +59,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.OfType<MethodScore>().First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
 
@@ -86,7 +87,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.OfType<MethodScore>().First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(2);
         }
 
@@ -120,7 +121,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("Function TestMe(i as Integer)");
+            results.OfType<MethodScore>().First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(5);
         }
     }

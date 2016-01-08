@@ -1,14 +1,10 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 
 namespace Inspector.CodeMetrics.CSharp
 {
-    public class CommentLocator : CodeMetrics.CommentLocator
+    public class CommentLocator : Generic.CommentLocator
     {
         public CommentLocator(SyntaxNode node) : base(node)
         {

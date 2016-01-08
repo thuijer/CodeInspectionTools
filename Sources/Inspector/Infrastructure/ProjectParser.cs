@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Inspector.Components;
 using MSBuild = Microsoft.Build.Evaluation;
 
 namespace Inspector.Infrastructure

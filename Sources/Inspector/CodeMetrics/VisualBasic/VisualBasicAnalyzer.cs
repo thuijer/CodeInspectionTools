@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
@@ -7,7 +8,7 @@ namespace Inspector.CodeMetrics.VisualBasic
 {
     public abstract class VisualBasicAnalyzer : ICodeMetricAnalyzer
     {
-        public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
+        public abstract IEnumerable<CodeScore> GetMetrics(SyntaxNode node);
 
         protected T CreateScore<T>(MethodBlockSyntax m, int score) where T: MethodScore, new()
         {

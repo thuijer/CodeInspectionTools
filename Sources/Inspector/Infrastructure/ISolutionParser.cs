@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Inspector.Components;
 
 namespace Inspector.Infrastructure
 {

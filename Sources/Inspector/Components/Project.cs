@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Inspector
+namespace Inspector.Components
 {
     public class Project
     {

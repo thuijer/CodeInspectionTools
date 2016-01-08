@@ -2,6 +2,7 @@
 using FluentAssertions;
 using InspectionTests.Builders;
 using Inspector.CodeMetrics.CSharp;
+using Inspector.CodeMetrics.Scores;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -31,7 +32,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(0);
         }
 
@@ -59,7 +60,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -92,7 +93,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(2);
         }
 
@@ -123,7 +124,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(3);
         }
 
@@ -150,7 +151,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(3);
         }
 
@@ -175,7 +176,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -205,7 +206,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -239,7 +240,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(2);
         }
 
@@ -275,7 +276,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(3);
         }
 
@@ -300,7 +301,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -325,7 +326,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -353,7 +354,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
 
@@ -381,7 +382,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Method.Should().Be("bool TestMe (int i)");
+            results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(2);
         }
     }

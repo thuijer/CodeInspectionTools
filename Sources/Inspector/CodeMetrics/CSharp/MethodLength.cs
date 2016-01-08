@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 
 namespace Inspector.CodeMetrics.CSharp
 {
     public class MethodLength : CSharpAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
+        public override IEnumerable<CodeScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node).Select(item =>
             {

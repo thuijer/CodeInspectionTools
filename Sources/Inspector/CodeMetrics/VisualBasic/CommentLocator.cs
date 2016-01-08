@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Inspector.CodeMetrics.VisualBasic
 {
 
-    public class CommentLocator : CodeMetrics.CommentLocator
+    public class CommentLocator : Generic.CommentLocator
     {
         public CommentLocator(SyntaxNode node) : base(node)
         {

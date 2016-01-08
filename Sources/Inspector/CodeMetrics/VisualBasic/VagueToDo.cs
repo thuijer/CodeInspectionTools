@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System.Text.RegularExpressions;
+using Inspector.CodeMetrics.Scores;
 
 namespace Inspector.CodeMetrics.VisualBasic
 {
     public class VagueToDo : VisualBasicAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
+        public override IEnumerable<CodeScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node)
                 .Select(m => CreateScore<VagueToDoScore>(m, CalculateScore(m)));          

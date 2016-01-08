@@ -1,10 +1,8 @@
-﻿namespace Inspector.CodeMetrics
+﻿namespace Inspector.CodeMetrics.Scores
 {
-    public class MethodScore
+    public class MethodScore: CodeScore
     {
-        public string ClassName { get; internal set; }
         public string Method { get; internal set; }
-        public int Score { get; internal set; }
 
         public override string ToString()
         {
