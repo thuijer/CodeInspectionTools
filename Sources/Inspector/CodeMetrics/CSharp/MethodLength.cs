@@ -11,22 +11,18 @@ namespace Inspector.CodeMetrics.CSharp
         {
             return GetMethods(node).Select(item =>
             {
+                var body = item.Body;
+
                 string fullMethod = string.Empty;
                 using (var writer = new StringWriter())
                 {
-                    item.WriteTo(writer);
+                    body.WriteTo(writer);
                     fullMethod = writer.ToString();
                 }
                 var lines = fullMethod.Split('\n');
 
                 var totalLength = lines.Length - 1;
-                var emptyLines = lines.Where(l => string.IsNullOrWhiteSpace(l)).Count();
-                var linesStartingWithComment = lines.Where(l => l.Trim().StartsWith("//")).Count();
-
-                var methodName = $"{ item.ReturnType } { item.Identifier}";
-                var className = item.Parent.ToString();
-
-                return CreateScore<MethodLengthScore>(item, totalLength - emptyLines - linesStartingWithComment);
+                return CreateScore<MethodLengthScore>(item, totalLength);
             });
         }
     }

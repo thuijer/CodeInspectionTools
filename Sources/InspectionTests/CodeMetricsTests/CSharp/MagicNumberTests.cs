@@ -29,7 +29,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(0);
         }
@@ -56,7 +56,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(0);
         }
@@ -83,7 +83,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
@@ -111,7 +111,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
@@ -138,7 +138,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i=1)");
             results.First().Score.Should().Be(1);
         }
@@ -172,7 +172,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
@@ -199,7 +199,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
@@ -224,7 +224,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(1);
         }
@@ -251,7 +251,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var sut = new MagicNumber();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("bool TestMe (int i)");
             results.First().Score.Should().Be(0);
         }

@@ -30,7 +30,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(0);
         }
@@ -57,7 +57,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(0);
         }
@@ -86,7 +86,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
@@ -117,7 +117,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
@@ -144,7 +144,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
@@ -172,7 +172,7 @@ namespace InspectionTests.CodeMetricsTests.VisualBasic
             var sut = new MagicString();
             var results = sut.GetMetrics(parsedNode);
 
-            results.Count().Should().Be(1);
+            results.Should().HaveCount(1);
             results.First().Method.Should().Be("Function TestMe(i as Integer)");
             results.First().Score.Should().Be(1);
         }
