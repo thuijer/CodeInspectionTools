@@ -1,10 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Inspector.CodeMetrics
+namespace Inspector.CodeMetrics.Generic
 {
     /// <summary>
     /// Basic (abstract) behavior. Use Inspector.Analyzers.CSharp.CommentLocator or

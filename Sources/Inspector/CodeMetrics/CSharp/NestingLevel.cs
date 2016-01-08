@@ -3,12 +3,13 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 
 namespace Inspector.CodeMetrics.CSharp
 {
     public class NestingLevel : CSharpAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
+        public override IEnumerable<CodeScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node).ToList().Select(m =>
             {

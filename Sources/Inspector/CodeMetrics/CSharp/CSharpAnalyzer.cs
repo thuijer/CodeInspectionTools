@@ -2,12 +2,13 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 
 namespace Inspector.CodeMetrics.CSharp
 {
     public abstract class CSharpAnalyzer : ICodeMetricAnalyzer
     {
-        public abstract IEnumerable<MethodScore> GetMetrics(SyntaxNode node);
+        public abstract IEnumerable<CodeScore> GetMetrics(SyntaxNode node);
 
         protected T CreateScore<T>(MethodDeclarationSyntax m, int score) where T : MethodScore, new()
         {

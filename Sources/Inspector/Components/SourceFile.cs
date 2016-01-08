@@ -1,11 +1,12 @@
-﻿using Inspector.CodeMetrics;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Inspector.CodeMetrics;
+using Inspector.CodeMetrics.Scores;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Inspector
+namespace Inspector.Components
 {
     public class SourceFile
     {
@@ -20,7 +21,7 @@ namespace Inspector
             FileName = srcFile;
             Code = code;
             LinesOfCode = Code.Split('\n').Count();
-            MethodScores = new List<MethodScore>();
+            CodeScores = new List<CodeScore>();
         }
 
         public int LinesOfCode
@@ -32,7 +33,7 @@ namespace Inspector
         public string FileName { get; private set; }
         public string Language { get; private set; }
 
-        public IEnumerable<MethodScore> MethodScores { get; private set; }
+        public IEnumerable<CodeScore> CodeScores { get; private set; }
 
         public string Code { get; private set; }
 
@@ -54,7 +55,7 @@ namespace Inspector
         {
             var syntax = GetSyntaxNodeFromCode();
             Language = syntax.Language;
-            MethodScores = analyzers.SelectMany(a => a.GetMetrics(syntax)).ToList();
+            CodeScores = analyzers.SelectMany(a => a.GetMetrics(syntax)).ToList();
         }
     }
 }

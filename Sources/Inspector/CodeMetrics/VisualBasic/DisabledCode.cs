@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Inspector.CodeMetrics.Scores;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -9,11 +10,11 @@ namespace Inspector.CodeMetrics.VisualBasic
 {
     public class DisabledCode : VisualBasicAnalyzer
     {
-        public override IEnumerable<MethodScore> GetMetrics(SyntaxNode node)
+        public override IEnumerable<CodeScore> GetMetrics(SyntaxNode node)
         {
             return GetMethods(node).ToList().Select(m => {
                 int score = CalculateScore(m);
-                return CreateScore<DisabledCodeScore>(m, score);
+                return CreateScore<DisabledScore>(m, score);
             });          
         }
 
