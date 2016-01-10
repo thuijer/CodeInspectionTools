@@ -21,7 +21,6 @@ namespace Inspector.Components
             FileName = srcFile;
             Code = code;
             LinesOfCode = Code.Split('\n').Count();
-            CodeScores = new List<CodeMetricScore>();
         }
 
         public int LinesOfCode
@@ -32,8 +31,6 @@ namespace Inspector.Components
         public Project Project { get; private set; }
         public string FileName { get; private set; }
         public string Language { get; private set; }
-
-        public IEnumerable<CodeMetricScore> CodeScores { get; private set; }
 
         public string Code { get; private set; }
 
