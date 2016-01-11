@@ -15,8 +15,8 @@ namespace Inspector
 
             SourceFileAnalyzer sourceAnalyzer = GetCodeAnalyzers();
 
-            IEnumerable<CodeMetricScore> codeMetrics = sourceAnalyzer.CalculateCodeMetrics(solution.SourceFiles);
-            IEnumerable<Level2Score> ifsqScores = solution.SourceFiles.Select(sf => new Level2Score(sf, codeMetrics));
+            Dictionary<SourceFile, IEnumerable<CodeMetricScore>> codeMetrics = sourceAnalyzer.CalculateCodeMetrics(solution.SourceFiles);
+            IEnumerable<Level2Score> ifsqScores = codeMetrics.Select(kvp => new Level2Score(kvp.Key, kvp.Value));
 
             PrintDetails(ifsqScores);
             PrintTotal(solution.SourceFiles, ifsqScores);

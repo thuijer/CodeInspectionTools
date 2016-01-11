@@ -14,9 +14,9 @@ namespace Inspector.Components
             analyzers.Add(analyzer);
         }
 
-        public IEnumerable<CodeMetricScore> CalculateCodeMetrics(IEnumerable<SourceFile> sourceFiles)
+        public Dictionary<SourceFile, IEnumerable<CodeMetricScore>> CalculateCodeMetrics(IEnumerable<SourceFile> sourceFiles)
         {
-            return sourceFiles.SelectMany(sf => sf.CalculateMetricsWith(analyzers));
+            return sourceFiles.ToDictionary(sf => sf, sf => sf.CalculateMetricsWith(analyzers));
         }                                                 
     }
 }
