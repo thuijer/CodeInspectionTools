@@ -133,11 +133,13 @@
     <Compile Include="CodeMetrics\VisualBasic\VagueToDo.cs" />
     <Compile Include="CodeMetrics\VisualBasic\VisualBasicAnalyzer.cs" />
     <Compile Include="Components\Project.cs" />
-    <Compile Include="Components\SourceFileAnalyzer.cs" />
+    <Compile Include="Components\IfSQLevel2Analyzer.cs" />
     <Compile Include="Components\SourceFile.cs" />
+    <Compile Include="Components\SourceFileAnalyzer.cs" />
     <Compile Include="IfSQ\Level2Score.cs" />
     <Compile Include="Infrastructure\FileSystemAdapter.cs" />
     <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
+    <Compile Include="Reports\IfSQLevel2Report.cs" />
     <Compile Include="Infrastructure\IProjectParser.cs" />
     <Compile Include="Infrastructure\ISolutionParser.cs" />
     <Compile Include="Infrastructure\ProjectParser.cs" />

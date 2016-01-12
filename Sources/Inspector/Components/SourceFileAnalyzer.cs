@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace Inspector.Components
 {
-    public class SourceFileAnalyzer
+
+    class SourceFileAnalyzer
     {
         private readonly ICollection<ICodeMetricAnalyzer> analyzers = new List<ICodeMetricAnalyzer>();
 
