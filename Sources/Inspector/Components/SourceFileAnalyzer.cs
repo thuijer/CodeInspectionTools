@@ -10,7 +10,7 @@ namespace Inspector.Components
     {
         private readonly ICollection<ICodeMetricAnalyzer> analyzers = new List<ICodeMetricAnalyzer>();
 
-        public void AddAnalyzer(ICodeMetricAnalyzer analyzer)
+        protected void AddAnalyzer(ICodeMetricAnalyzer analyzer)
         {
             analyzers.Add(analyzer);
         }

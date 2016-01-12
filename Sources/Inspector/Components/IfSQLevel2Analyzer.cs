@@ -1,7 +1,14 @@
-﻿namespace Inspector.Components
+﻿using System.Collections.Generic;
+using System.Linq;
+using Inspector.CodeMetrics.Scores;
+using Inspector.IfSQ;
+
+namespace Inspector.Components
 {
     class IfSQLevel2Analyzer : SourceFileAnalyzer
     {
+        IEnumerable<Level2Score> scores;
+
         public IfSQLevel2Analyzer()
         {
             AddIfSQLevel2Analyzers();
@@ -40,6 +47,17 @@
             //SPM-2
             AddAnalyzer(new CodeMetrics.CSharp.MagicString());
             AddAnalyzer(new CodeMetrics.VisualBasic.MagicString());
+        }
+
+        public void Analyze(IEnumerable<SourceFile> sourceFiles)
+        {
+            Dictionary<SourceFile, IEnumerable<CodeMetricScore>> codeMetrics = CalculateCodeMetrics(sourceFiles);
+            scores = codeMetrics.Select(kvp => new Level2Score(kvp.Key, kvp.Value));
+        }
+
+        public IEnumerable<Level2Score> Scores
+        {
+            get { return scores; }
         }
     }
 }
