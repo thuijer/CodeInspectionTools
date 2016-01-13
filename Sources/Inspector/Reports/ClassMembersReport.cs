@@ -10,11 +10,20 @@ namespace Inspector.Reports
     {
         public void PrintMetrics(IEnumerable<ClassScore> classMemberScores)
         {
-            Console.WriteLine($"Number of classes: {classMemberScores.Count()}");
+            var scores = classMemberScores.ToList();
+            Console.WriteLine($"Number of classes: {scores.Count}");
 
-            Console.WriteLine($"  Highest number of members: {classMemberScores.Max(cms => cms.MemberCount)}");
-            Console.WriteLine($"  Average number of members: {classMemberScores.Average(cms => cms.MemberCount):N2}");
-            Console.WriteLine($"  Standard deviation of members: {classMemberScores.Select(cms => cms.MemberCount).StdDev():N2}");
+            Console.WriteLine($"  Highest number of members: {scores.Max(cms => cms.MemberCount)}");
+            Console.WriteLine($"  Average number of members: {scores.Average(cms => cms.MemberCount):N2}");
+            Console.WriteLine($"  Standard deviation of members: {scores.Select(cms => cms.MemberCount).StdDev():N2}");
+
+            var top10LargestClasses = scores.OrderByDescending(cls => cls.TotalLineCount).Take(10);
+
+            Console.WriteLine("Top 10 Largest classes:");
+            foreach (var largeClass in top10LargestClasses)
+            {
+                Console.WriteLine( $"  {largeClass.Classname} - {largeClass.TotalLineCount}");
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 }
                 ");
 
-            var sut = new ClassMembers();
+            var sut = new ClassComplexity();
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
@@ -40,7 +40,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 }
                 ");
 
-            var sut = new ClassMembers();
+            var sut = new ClassComplexity();
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
@@ -66,7 +66,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 }
                 ");
 
-            var sut = new ClassMembers();
+            var sut = new ClassComplexity();
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
