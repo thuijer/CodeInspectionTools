@@ -1,4 +1,5 @@
-﻿using Inspector.Components;
+﻿using System.IO;
+using Inspector.Components;
 using System.Linq;
 using Inspector.CustomAnalyzers;
 using Inspector.Reports;
@@ -9,7 +10,8 @@ namespace Inspector
     {
         static void Main(string[] args)
         {
-            Solution solution = new Solution(args.First());
+            string path = Path.GetFullPath(args.First());
+            Solution solution = new Solution(path);
 
             PrintIfSQLevel2Scores(solution);
             PrintClassMemberScores(solution);
