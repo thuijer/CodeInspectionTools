@@ -1,9 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Inspector.CodeMetrics.Scores;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Inspector.Infrastructure;
 
 namespace Inspector.CodeMetrics.CSharp
 {
@@ -13,30 +12,9 @@ namespace Inspector.CodeMetrics.CSharp
         {
             return GetMethods(node).Select(item =>
             {
-                string fullMethod = string.Empty;
-
-                fullMethod = GetBodyText(item, fullMethod);
-
-                var lines = fullMethod.Split('\n');
-
-                var totalLength = lines.Length - 1;
+                var totalLength = item.GetLineCount() - 1;
                 return CreateScore<MethodLengthScore>(item, totalLength);
             });
-        }
-
-        private static string GetBodyText(MethodDeclarationSyntax method, string fullMethod)
-        {
-            var body = method.Body;
-            if (body != null)
-            {
-                using (var writer = new StringWriter())
-                {
-                    body.WriteTo(writer);
-                    fullMethod = writer.ToString();
-                }
-            }
-
-            return fullMethod;
         }
     }
 }

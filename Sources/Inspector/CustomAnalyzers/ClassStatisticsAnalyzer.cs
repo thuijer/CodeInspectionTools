@@ -16,13 +16,13 @@ namespace Inspector.CustomAnalyzers
         private void AddStatisticsAnalyzers()
         {
             //SP-1
-            AddAnalyzer(new CodeMetrics.CSharp.ClassMembers());
+            AddAnalyzer(new CodeMetrics.CSharp.ClassComplexity());
         }
 
         public void Analyze(IEnumerable<SourceFile> sourceFiles)
         {
             Dictionary<SourceFile, IEnumerable<CodeMetricScore>> codeMetrics = CalculateCodeMetrics(sourceFiles);
-            Scores = codeMetrics.Values.SelectMany(metrics => metrics).Select( metric => new ClassScore( metric.ClassName, metric.Score) );
+            Scores = codeMetrics.Values.SelectMany(metrics => metrics.Cast<ClassComplexityScore>()).Select( metric => new ClassScore( metric.ClassName, metric.Score, metric.LineCount) );
         }
 
         public IEnumerable<ClassScore> Scores { get; set; }

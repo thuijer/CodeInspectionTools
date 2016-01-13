@@ -102,12 +102,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeMetrics\CSharp\ClassMembers.cs" />
+    <Compile Include="CodeMetrics\CSharp\ClassComplexity.cs" />
     <Compile Include="CodeMetrics\CSharp\EmptyStatementBlock.cs" />
     <Compile Include="CodeMetrics\CSharp\MagicString.cs" />
     <Compile Include="CodeMetrics\CSharp\MagicNumber.cs" />
     <Compile Include="CodeMetrics\CSharp\DisabledCode.cs" />
     <Compile Include="CodeMetrics\Generic\Comment.cs" />
+    <Compile Include="CodeMetrics\Scores\ClassComplexityScore.cs" />
     <Compile Include="CodeMetrics\Scores\ControlFlowComplexityScore.cs" />
     <Compile Include="CodeMetrics\CSharp\CommentLocator.cs" />
     <Compile Include="CodeMetrics\CSharp\ControlFlowComplexity.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Infrastructure\FileSystemAdapter.cs" />
     <Compile Include="Infrastructure\IEnumerableExtensions.cs" />
     <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
+    <Compile Include="Infrastructure\MethodDeclarationSyntaxExtensions.cs" />
     <Compile Include="Reports\ClassMembersReport.cs" />
     <Compile Include="Reports\IfSQLevel2Report.cs" />
     <Compile Include="Infrastructure\IProjectParser.cs" />
