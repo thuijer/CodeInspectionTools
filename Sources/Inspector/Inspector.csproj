@@ -102,6 +102,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeMetrics\CSharp\ClassMembers.cs" />
     <Compile Include="CodeMetrics\CSharp\EmptyStatementBlock.cs" />
     <Compile Include="CodeMetrics\CSharp\MagicString.cs" />
     <Compile Include="CodeMetrics\CSharp\MagicNumber.cs" />
@@ -133,12 +134,15 @@
     <Compile Include="CodeMetrics\VisualBasic\VagueToDo.cs" />
     <Compile Include="CodeMetrics\VisualBasic\VisualBasicAnalyzer.cs" />
     <Compile Include="Components\Project.cs" />
-    <Compile Include="Components\IfSQLevel2Analyzer.cs" />
+    <Compile Include="CustomAnalyzers\ClassScore.cs" />
+    <Compile Include="CustomAnalyzers\ClassStatisticsAnalyzer.cs" />
+    <Compile Include="IfSQ\IfSQLevel2CSharpAnalyzer.cs" />
     <Compile Include="Components\SourceFile.cs" />
     <Compile Include="Components\SourceFileAnalyzer.cs" />
     <Compile Include="IfSQ\Level2Score.cs" />
     <Compile Include="Infrastructure\FileSystemAdapter.cs" />
     <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
+    <Compile Include="Reports\ClassMembersReport.cs" />
     <Compile Include="Reports\IfSQLevel2Report.cs" />
     <Compile Include="Infrastructure\IProjectParser.cs" />
     <Compile Include="Infrastructure\ISolutionParser.cs" />

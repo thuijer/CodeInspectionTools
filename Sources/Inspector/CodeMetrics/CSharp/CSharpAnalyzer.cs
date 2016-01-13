@@ -20,7 +20,7 @@ namespace Inspector.CodeMetrics.CSharp
             return result;
         }
                 
-        private string GetClassName(MethodDeclarationSyntax m)
+        protected string GetClassName(MethodDeclarationSyntax m)
         {
             var classBlock = m.Parent as ClassDeclarationSyntax;
             if (classBlock != null)
@@ -37,6 +37,11 @@ namespace Inspector.CodeMetrics.CSharp
         protected IEnumerable<MethodDeclarationSyntax> GetMethods(SyntaxNode node)
         {
             return node.DescendantNodes().OfType<MethodDeclarationSyntax>();
+        }
+
+        protected IEnumerable<ClassDeclarationSyntax> GetClasses(SyntaxNode node)
+        {
+            return node.DescendantNodes().OfType<ClassDeclarationSyntax>();
         }
     }
 }

@@ -5,11 +5,11 @@ using Inspector.IfSQ;
 
 namespace Inspector.Components
 {
-    class IfSQLevel2Analyzer : SourceFileAnalyzer
+    class IfSQLevel2CSharpAnalyzer : SourceFileAnalyzer
     {
         IEnumerable<Level2Score> scores;
 
-        public IfSQLevel2Analyzer()
+        public IfSQLevel2CSharpAnalyzer()
         {
             AddIfSQLevel2Analyzers();
         }
