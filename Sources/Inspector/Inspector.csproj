@@ -141,6 +141,7 @@
     <Compile Include="Components\SourceFileAnalyzer.cs" />
     <Compile Include="IfSQ\Level2Score.cs" />
     <Compile Include="Infrastructure\FileSystemAdapter.cs" />
+    <Compile Include="Infrastructure\IEnumerableExtensions.cs" />
     <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
     <Compile Include="Reports\ClassMembersReport.cs" />
     <Compile Include="Reports\IfSQLevel2Report.cs" />
