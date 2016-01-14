@@ -18,9 +18,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         return false;
                     }
@@ -44,8 +42,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         string test = ""hello"";
                         return false;
@@ -70,8 +66,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         string test = ""hello"";
                         if (test == ""hello"")
@@ -98,9 +92,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         string test = ""hello"";
                         return test == ""hello"";
@@ -124,9 +116,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         string test = ""hello"";
                         switch(test) {
@@ -156,9 +146,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         string test = ""hello"";
 

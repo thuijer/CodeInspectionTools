@@ -18,9 +18,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         return false;
                     }
@@ -44,7 +42,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
                     
                     public bool TestMe(int i) {
                         try {
@@ -72,9 +69,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         try {
                             i=i*2;

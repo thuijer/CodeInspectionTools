@@ -19,8 +19,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         return false;
                     }
@@ -44,8 +42,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         if (i > 10) {
                             return true;
@@ -72,8 +68,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         if (i > 10) 
                             if (true) 
@@ -100,9 +94,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         if (i > 10) 
                             return true;
@@ -130,9 +122,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         if (i > 10)
                         {
@@ -162,9 +152,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         if (i > 10) 
                         {
@@ -197,9 +185,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         if (i > 10) 
                             if (true) 
@@ -227,9 +213,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         switch (i)
                         {
@@ -262,7 +246,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
                     
                     public bool TestMe(int i) {
                         switch (i)
@@ -296,9 +279,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         int j = i * 2;
                         switch (i)
@@ -337,9 +318,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
-                    public bool TestMe(int i) {
+                     public bool TestMe(int i) {
                         int j = i * 2;
                         switch (i)
                         {
@@ -375,9 +354,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         int j = i * 2;
                         switch (i)
@@ -419,8 +396,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {                        
                         for (int j=0; j<i; j++) {
                             //nothing here
@@ -448,8 +423,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {    
                         if (i > 10) {                    
                             for (int j=0; j<i; j++) {
@@ -478,8 +451,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {                                              
                         for (int j=0; j<i; j++) {
                             if (j > 10) {
@@ -508,9 +479,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
-                    public bool TestMe(int i) {
+                   public bool TestMe(int i) {
                         while (i > 10) {
                             i--;
                         }
@@ -536,8 +505,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) {
                         while (i > 10) {
                             i--;
@@ -567,9 +534,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
                 using System.Text;
 
                 [Serializable]
-                public class TestClass {
-                    public TestClass() { }
-                    
+                public class TestClass {                    
                     public bool TestMe(int i) {
                         do  {
                             i--;

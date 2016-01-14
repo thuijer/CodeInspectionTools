@@ -10,7 +10,7 @@ namespace Inspector.CodeMetrics.CSharp
     {
         public abstract IEnumerable<CodeMetricScore> GetMetrics(SyntaxNode node);
 
-        protected T CreateScore<T>(MethodDeclarationSyntax m, int score) where T : MethodScore, new()
+        protected T CreateScore<T>(BaseMethodDeclarationSyntax m, int score) where T : MethodScore, new()
         {
             T result = new T();
             result.ClassName = GetClassName(m);
@@ -20,7 +20,7 @@ namespace Inspector.CodeMetrics.CSharp
             return result;
         }
                 
-        protected string GetClassName(MethodDeclarationSyntax m)
+        protected string GetClassName(BaseMethodDeclarationSyntax m)
         {
             var classBlock = m.Parent as ClassDeclarationSyntax;
             if (classBlock != null)
@@ -29,14 +29,25 @@ namespace Inspector.CodeMetrics.CSharp
             return "n/a";
         }
 
-        private string GetMethodName(MethodDeclarationSyntax m)
+        private string GetMethodName(BaseMethodDeclarationSyntax m)
         {
-            return $"{ m.ReturnType } { m.Identifier } {m.ParameterList.ToString()}";
+            if (m is DestructorDeclarationSyntax)
+            {
+                var destructor = m as DestructorDeclarationSyntax;
+                return $"{ destructor.Identifier } {destructor.ParameterList}";
+            }
+            if (m is ConstructorDeclarationSyntax)
+            {
+                var constructor = m as ConstructorDeclarationSyntax;
+                return $"{constructor.Identifier} {constructor.ParameterList}";
+            }
+            var method = m as MethodDeclarationSyntax;
+            return $"{ method.ReturnType } { method.Identifier } {method.ParameterList}";
         }
 
-        protected IEnumerable<MethodDeclarationSyntax> GetMethods(SyntaxNode node)
+        protected IEnumerable<BaseMethodDeclarationSyntax> GetMethods(SyntaxNode node)
         {
-            return node.DescendantNodes().OfType<MethodDeclarationSyntax>();
+            return node.DescendantNodes().OfType<BaseMethodDeclarationSyntax>();
         }
 
         protected IEnumerable<ClassDeclarationSyntax> GetClasses(SyntaxNode node)
