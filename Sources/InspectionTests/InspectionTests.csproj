@@ -137,6 +137,7 @@
     <Compile Include="CodeMetricsTests\VisualBasic\VagueToDoTests.cs" />
     <Compile Include="Builders\VBSyntaxTreeBuilder.cs" />
     <Compile Include="ComponentTests\ProjectTests.cs" />
+    <Compile Include="InfrastructureTests\GetLineCountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionInfoTests.cs" />
   </ItemGroup>
@@ -153,9 +154,7 @@
       <Name>Inspector</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="InfrastructureTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
