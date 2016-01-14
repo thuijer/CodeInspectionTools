@@ -144,7 +144,7 @@
     <Compile Include="Infrastructure\FileSystemAdapter.cs" />
     <Compile Include="Infrastructure\IEnumerableExtensions.cs" />
     <Compile Include="Infrastructure\IFileSystemAdapter.cs" />
-    <Compile Include="Infrastructure\MethodDeclarationSyntaxExtensions.cs" />
+    <Compile Include="Infrastructure\BaseMethodDeclarationSyntaxExtensions.cs" />
     <Compile Include="Reports\ClassMembersReport.cs" />
     <Compile Include="Reports\IfSQLevel2Report.cs" />
     <Compile Include="Infrastructure\IProjectParser.cs" />

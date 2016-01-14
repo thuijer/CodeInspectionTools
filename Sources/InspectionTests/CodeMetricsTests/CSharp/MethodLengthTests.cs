@@ -35,6 +35,52 @@ namespace InspectionTests.CodeMetricsTests.CSharp
         }
 
         [TestMethod]
+        public void EmptyConstructor_ShouldReturn_MethodWithScoreOf_2()
+        {
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public TestClass(int i) 
+                    {                        
+                    }
+                }
+                ");
+
+            var sut = new MethodLength();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Should().HaveCount(1);
+            results.OfType<MethodScore>().First().Method.Should().Be("TestClass (int i)");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void EmptyDestructor_ShouldReturn_MethodWithScoreOf_2()
+        {
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
+                using System;
+                using System.Text;
+
+                [Serializable]
+                public class TestClass {
+                    public ~TestClass() 
+                    {                        
+                    }
+                }
+                ");
+
+            var sut = new MethodLength();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Should().HaveCount(1);
+            results.OfType<MethodScore>().First().Method.Should().Be("~TestClass ()");
+            results.First().Score.Should().Be(2);
+        }
+
+        [TestMethod]
         public void MethodWith25Lines_ShouldReturn_MethodWithScoreOf_25()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
