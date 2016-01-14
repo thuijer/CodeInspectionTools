@@ -12,7 +12,7 @@ namespace Inspector.CodeMetrics.CSharp
         {
             return GetMethods(node).Select(item =>
             {
-                var totalLength = item.GetLineCount() - 1;
+                var totalLength = item.GetLineCount();
                 return CreateScore<MethodLengthScore>(item, totalLength);
             });
         }

@@ -12,7 +12,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
     public class MethodLengthTests
     {
         [TestMethod]
-        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_2()
+        public void EmptyMethod_ShouldReturn_MethodWithScoreOf_0()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -31,11 +31,11 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
             results.Should().HaveCount(1);
             results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(2);
+            results.First().Score.Should().Be(0);
         }
 
         [TestMethod]
-        public void EmptyConstructor_ShouldReturn_MethodWithScoreOf_2()
+        public void EmptyConstructor_ShouldReturn_MethodWithScoreOf_0()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -54,11 +54,11 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
             results.Should().HaveCount(1);
             results.OfType<MethodScore>().First().Method.Should().Be("TestClass (int i)");
-            results.First().Score.Should().Be(2);
+            results.First().Score.Should().Be(0);
         }
 
         [TestMethod]
-        public void EmptyDestructor_ShouldReturn_MethodWithScoreOf_2()
+        public void EmptyDestructor_ShouldReturn_MethodWithScoreOf_0()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -77,11 +77,11 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
             results.Should().HaveCount(1);
             results.OfType<MethodScore>().First().Method.Should().Be("~TestClass ()");
-            results.First().Score.Should().Be(2);
+            results.First().Score.Should().Be(0);
         }
 
         [TestMethod]
-        public void MethodWith25Lines_ShouldReturn_MethodWithScoreOf_25()
+        public void MethodWith23Lines_ShouldReturn_MethodWithScoreOf_23()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -123,7 +123,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
             results.Should().HaveCount(1);
             results.OfType<MethodScore>().First().Method.Should().Be("bool TestMe (int i)");
-            results.First().Score.Should().Be(25);
+            results.First().Score.Should().Be(23);
         }     
     }
 }
