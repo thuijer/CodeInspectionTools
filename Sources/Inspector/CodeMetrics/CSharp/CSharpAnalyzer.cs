@@ -34,7 +34,7 @@ namespace Inspector.CodeMetrics.CSharp
             if (m is DestructorDeclarationSyntax)
             {
                 var destructor = m as DestructorDeclarationSyntax;
-                return $"{ destructor.Identifier } {destructor.ParameterList}";
+                return $"~{ destructor.Identifier } {destructor.ParameterList}";
             }
             if (m is ConstructorDeclarationSyntax)
             {

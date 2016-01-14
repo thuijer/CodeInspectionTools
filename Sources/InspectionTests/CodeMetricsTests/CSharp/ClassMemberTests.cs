@@ -49,7 +49,28 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
 
         [TestMethod]
-        public void ClassWith6FieldsMethodsAndProperties_ShouldHave_ScoreOf6()
+        public void ClassWithDestructor_ShouldHave_Score1()
+        {
+            var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
+                using System;
+                using System.Text;
+
+                public class TestClass {
+                   public ~TestClass() { } 
+                }
+                ");
+
+            var sut = new ClassComplexity();
+            var results = sut.GetMetrics(parsedNode);
+
+            results.Should().HaveCount(1);
+            results.First().Score.Should().Be(1);
+        }
+
+
+
+        [TestMethod]
+        public void ClassWith7FieldsMethodsAndProperties_ShouldHave_ScoreOf7()
         {
             var parsedNode = new CSharpSyntaxTreeBuilder().FromSource(@"
                 using System;
@@ -57,6 +78,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 public class TestClass {
                    public TestClass() { } 
+                   public ~TestClass() { } 
 
                    int Test { get; set; }
                    string Test2 { get; set; }
@@ -70,7 +92,7 @@ namespace InspectionTests.CodeMetricsTests.CSharp
             var results = sut.GetMetrics(parsedNode);
 
             results.Should().HaveCount(1);
-            results.First().Score.Should().Be(6);
+            results.First().Score.Should().Be(7);
         }
     }
 }
