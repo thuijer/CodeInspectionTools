@@ -18,7 +18,7 @@ namespace Inspector.CodeMetrics.CSharp
             });          
         }
 
-        private int CalculateScore(MethodDeclarationSyntax m)
+        private int CalculateScore(BaseMethodDeclarationSyntax m)
         {
             var locator = new CommentLocator(m);
             return locator.GetComments(ToDoCommentFilter).Count();            

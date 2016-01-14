@@ -17,9 +17,9 @@ namespace Inspector.CodeMetrics.CSharp
             return GetMethods(node).Select(m => CreateScore<ControlFlowComplexityScore>(m, GetScore(m)));
         }
 
-        private int GetScore(MethodDeclarationSyntax method)
+        private int GetScore(BaseMethodDeclarationSyntax method)
         {
-            var nodes = method.DescendantNodes();
+            var nodes = method.DescendantNodes().ToList();
             var ifs = nodes.OfType<BinaryExpressionSyntax>();
             var cases = nodes.OfType<CaseSwitchLabelSyntax>();
             var boolExprMulti = nodes.OfType<IfStatementSyntax>().Where(c => c.Condition is LiteralExpressionSyntax);

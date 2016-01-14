@@ -20,8 +20,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) 
                     {                        
                     }
@@ -45,8 +43,6 @@ namespace InspectionTests.CodeMetricsTests.CSharp
 
                 [Serializable]
                 public class TestClass {
-                    public TestClass() { }
-                    
                     public bool TestMe(int i) 
                     {                        
                         if (i == 10) 

@@ -18,7 +18,7 @@ namespace Inspector.CodeMetrics.CSharp
             });
         }
 
-        private int CalculateScore(MethodDeclarationSyntax method)
+        private int CalculateScore(BaseMethodDeclarationSyntax method)
         {
             var nodes = method.DescendantNodes();
 
