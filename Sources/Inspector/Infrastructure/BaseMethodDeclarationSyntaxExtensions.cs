@@ -11,6 +11,9 @@ namespace Inspector.Infrastructure
     {
         public static string GetBodyText(this BaseMethodDeclarationSyntax method)
         {
+            if (method.Body == null)
+                return String.Empty;
+
             var body = method.Body.WithoutTrivia();
 
             if (body != null)
